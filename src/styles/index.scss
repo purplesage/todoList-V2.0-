@@ -200,7 +200,13 @@ input, select {
                 height: 20px;
             }
         }
+
+        .actions-list-div {
+            display: flex;
+            flex-direction: column;
+            grid-row: 2 / -1;
+            grid-column: 1 / 2;
+            background-color: rgb(224, 159, 62);
+        }
     }
-
-
 }
