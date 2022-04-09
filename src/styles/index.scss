@@ -179,6 +179,7 @@ input, select {
     }
 
     .add-button-div {
+        display: none;
         width: 800px;
         height: 400px;
         position: absolute;
@@ -186,13 +187,12 @@ input, select {
         border:rgb(51, 92, 103) 2px solid;
         justify-self: center;
         align-self: center;
-        display: grid;
         grid-template: 50px 1fr / 200px 1fr ;
 
         .header-div {
             display: flex;
             justify-content: space-between;
-            background-color: rgb(158, 42, 43);
+            background-color: rgb(51, 92, 103);
             grid-column: 1 / -1;
 
             button{

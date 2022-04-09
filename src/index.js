@@ -3,7 +3,7 @@ import './styles/index.scss';
 //? This module contains the basic dynamically created DOM elements.
 //for the web's functions (logic), see logic.js
 
-const AddButtonDomElements = (() => {
+const addButtonDomElements = (() => {
 
     //*Add div Element
     const addButtonDomElement = document.getElementById('add-button');
@@ -51,13 +51,30 @@ const AddButtonDomElements = (() => {
     addButtonDiv.appendChild(header);
     addButtonDiv.appendChild(actionsListDiv);
     addButtonDiv.appendChild(inputMainDiv);
-    
 
+    //appends add button div to main-grid div.
+    mainGridDiv.appendChild(addButtonDiv);
+    
+    //*event listeners to reveal and hide addButtonDiv.
     addButtonDomElement.addEventListener('click', () => {
 
-        //appends add button div to main-grid div.
-        mainGridDiv.appendChild(addButtonDiv);
-    })
+        addButtonDiv.style.display = "grid";
+        
+        //default content:
+        addButtonDomElements.inputMainDiv.innerHTML = "";
+        addButtonDomElements.inputMainDiv.append(todoInputs.topInputsDiv, todoInputs.dueDateLabel, todoInputs.dueDateInput, todoInputs.priorityButtonsDiv);
+
+    });
+
+    divExitButton.addEventListener('click', () => {
+
+        addButtonDiv.style.display = "none";
+
+    });
+
+
+
+    
 
     //these elements will perform specific actions through event listeners.
     return {divExitButton, toDoActionTab, projectActionTab, inputMainDiv};
@@ -66,37 +83,107 @@ const AddButtonDomElements = (() => {
 
 const todoInputs = (() => {
 
-
     //* top inputs
     const topInputsDiv = document.createElement('div');
 
-    const titleInput = document.createElement('input');
-        titleInput.setAttribute('type', 'text');
+    const titleInput = document.createElement('textarea');
         titleInput.setAttribute('placeholder', 'Title: ');
+        titleInput.setAttribute('id', 'title-input');
         titleInput.classList = "title-input";
+        
     topInputsDiv.appendChild(titleInput);
 
-    const detailsInput = document.createElement('input');
-        detailsInput.setAttribute('type', 'text');
+    const detailsInput = document.createElement('textarea');
         detailsInput.setAttribute('placeholder', 'Details: ');
+        detailsInput.setAttribute('id', 'details-input');
         detailsInput.classList = "details-input";
     topInputsDiv.appendChild(detailsInput);
 
-
     //* bottom inputs
-
     const dueDateLabel = document.createElement('label');
+        dueDateLabel.setAttribute('for', 'due-date-input');
+        dueDateLabel.textContent = "Due Date: ";
 
     const dueDateInput = document.createElement('input');
         dueDateInput.setAttribute('type', 'date');
         dueDateInput.setAttribute('required', '');
+        detailsInput.setAttribute('id', 'due-date-input');
         dueDateInput.classList = 'due-date-input';
 
-    const priorityButtonsLabel = document.createElement('label');
+    // priority radio buttons
+    const priorityButtonsDiv = document.createElement('div');
+        priorityButtonsDiv.classList = 'priority-buttons-div';
+        priorityButtonsDiv.textContent = "Priority: "
+
+    const lowPriorityLabel = document.createElement('label');
+        lowPriorityLabel.setAttribute('for', 'low-priority-button');
+        lowPriorityLabel.classList = "low-priority-label";
+        lowPriorityLabel.textContent = 'LOW';
+
+    const lowPriorityButton = document.createElement('input');
+        lowPriorityButton.setAttribute('type', 'radio');
+        lowPriorityButton.setAttribute('id', 'low-priority-button');
+        lowPriorityButton.classList = "low-priority-button";
+
+    const mediumPriorityLabel = document.createElement('label');
+        mediumPriorityLabel.setAttribute('for', 'medium-priority-button');
+        mediumPriorityLabel.classList = "low-priority-label";
+        mediumPriorityLabel.textContent = 'MEDIUM';
+
+    const mediumPriorityButton = document.createElement('input');
+        mediumPriorityButton.setAttribute('type', 'radio');
+        mediumPriorityButton.setAttribute('id', 'medium-priority-button');
+        mediumPriorityButton.classList = "medium-priority-button";
     
+    const highPriorityLabel = document.createElement('label');
+        highPriorityLabel.setAttribute('for', 'high-priority-button');
+        highPriorityLabel.classList = "low-priority-label";
+        highPriorityLabel.textContent = 'HIGH';
 
-    AddButtonDomElements.inputMainDiv
+    const highPriorityButton = document.createElement('input');
+        highPriorityButton.setAttribute('type', 'radio');
+        highPriorityButton.setAttribute('id', 'high-priority-button');
+        highPriorityButton.classList = "high-priority-button";
+    
+    // add todo button
+    const addTodoButton = document.createElement('button');
+        addTodoButton.classList = "add-todo-button";
+        addTodoButton.setAttribute('id', 'add-todo-button');
+        addTodoButton.textContent = "ADD TO DO";
+    
+    priorityButtonsDiv.append(lowPriorityLabel, lowPriorityButton, mediumPriorityLabel, mediumPriorityButton, highPriorityLabel, highPriorityButton, addTodoButton);
 
+    //*tab changing event listener
 
+    addButtonDomElements.toDoActionTab.addEventListener('click', () => {
+
+        addButtonDomElements.inputMainDiv.innerHTML = "";
+        addButtonDomElements.inputMainDiv.append(topInputsDiv, dueDateLabel, dueDateInput,priorityButtonsDiv);
+    });
+
+    return {topInputsDiv, dueDateLabel, dueDateInput,priorityButtonsDiv};
 
 })();
+
+
+const projectInputs = (() => {
+
+    const projectNameInput = document.createElement('textarea');
+        projectNameInput.setAttribute('placeholder', 'Project name: ');
+        projectNameInput.setAttribute('id', 'project-name-input');
+        projectNameInput.classList = "project-name-input";
+
+    const createProjectButton = document.createElement('button');
+        createProjectButton.textContent = "Create Project";
+        createProjectButton.classList = "create-project-button";
+        createProjectButton.setAttribute('id', 'create-project-button');
+
+        addButtonDomElements.projectActionTab.addEventListener('click', () => {
+        
+            addButtonDomElements.inputMainDiv.innerHTML = "";
+            addButtonDomElements.inputMainDiv.append(projectNameInput, createProjectButton);
+
+        });
+})();
+
+
