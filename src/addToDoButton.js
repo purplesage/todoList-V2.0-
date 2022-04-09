@@ -152,7 +152,16 @@ const todoInputs = (() => {
         addButtonDomElements.inputMainDiv.append(topInputsDiv, dueDateLabel, dueDateInput,priorityButtonsDiv);
     });
 
-    return {topInputsDiv, dueDateLabel, dueDateInput, priorityButtonsDiv};
+    return {
+        topInputsDiv, 
+        dueDateLabel, 
+        dueDateInput, 
+        priorityButtonsDiv,
+        titleInput,
+        detailsInput,
+        dueDateInput,
+        priorityButtonsDiv,
+    };
 
 })();
 
@@ -175,6 +184,8 @@ const projectInputs = (() => {
             addButtonDomElements.inputMainDiv.append(projectNameInput, createProjectButton);
 
         });
+
+        return {createProjectButton};
 })();
 
 export {addButtonDomElements, todoInputs, projectInputs};
