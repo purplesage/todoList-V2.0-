@@ -1,7 +1,7 @@
 import {todoInputs, projectInputs} from './addToDoButton';
 import { todoObjectDataBase } from '.';
 import { format, isThisWeek, parseISO} from 'date-fns';
-import { sideMenuTabFilters } from '.';
+/* import { sideMenuTabFilters } from '.'; */
 
 const makeTodoObject = () => {
     const newTodoObject = {
@@ -49,12 +49,13 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 
         //todo: priority stuff goes here
 
-        //todo: div delete function
+        //* div/object delete
 
         const deleteDiv = () =>{
             const contentDiv = document.querySelector(".content-grid");
 
             contentDiv.removeChild(todoDiv);
+            todoObjectDataBase.splice(todoObjectDataBase.indexOf(todoObject), 1);
         };
 
         deleteButtonSVG.addEventListener('click', () => {
@@ -97,7 +98,7 @@ const todoDistribution = () => {
     /* sideMenuTabDivs.homeDiv.appendChild(divMaker.todoObject.div); */
 
     
-   /*  if (format(divMaker.todoObject.dueDate, "MM/dd/yyyy") === todaysDate){
+    /* if (format(divMaker.todoObject.dueDate, "MM/dd/yyyy") === todaysDate){
         
         let clone = divMaker.todoObject.div.cloneNode(true);
         sideMenuTabDivs.todayDiv.appendChild(cloneMaker().todoObject.div);
@@ -108,9 +109,9 @@ const todoDistribution = () => {
         
         let clone = divMaker.todoObject.div.cloneNode(true);
         sideMenuTabDivs.weekDiv.appendChild(cloneMaker().todoObject.div);
-    };
+    }; */
 
-}; */
+};
 
 const makeProjectTab = () => {
     const projectsUl = document.getElementById('projects-ul');
@@ -122,6 +123,41 @@ const makeProjectTab = () => {
     projectsUl.appendChild(newProjectTab);
 };
 
+//* filter functions.
+
+const homeFilter = (div) => {
+
+    for (let i = 0; i < todoObjectDataBase.length; i++) {
+                    
+        div.appendChild(todoObjectDataBase[i].div);
+    };
+
+};
+
+const todayFilter = (div) => {
+
+    const todaysDate = format(new Date(), "MM/dd/yyyy");
+    const todayFilter = todoObjectDataBase.filter(todoObject => format(todoObject.dueDate, "MM/dd/yyyy") === todaysDate);
+
+        for (let i = 0; i < todayFilter.length; i++) {
+                    
+            div.appendChild(todayFilter[i].div);
+        };
+};
+
+const weekFilter = (div) => {
+
+    const weekFilter = todoObjectDataBase.filter(todoObject => isThisWeek(new Date(todoObject.dueDate)) === true);
+
+    for (let i = 0; i < weekFilter.length; i++) {
+            
+        div.appendChild(weekFilter[i].div);
+    };
+};
 
 
-export {/* makeTodoObject, makeProjectTab, makeTodoDiv,  */todoDistribution};
+
+
+
+
+export {todoDistribution, homeFilter, todayFilter, weekFilter};

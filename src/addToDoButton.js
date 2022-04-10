@@ -1,4 +1,5 @@
-import {todoDistribution} from "./functions";
+import {todoDistribution, homeFilter, todayFilter, weekFilter} from "./functions";
+import { sideMenuTabFilters } from ".";
 
 const addButtonDomElements = (() => {
 
@@ -158,6 +159,20 @@ const todoInputs = (() => {
 
     addTodoButton.addEventListener('click', () => {
         todoDistribution();
+
+        if (sideMenuTabFilters.currentlyInHomeTab = true){
+            sideMenuTabFilters.generalDiv.innerHTML = "";
+            homeFilter(sideMenuTabFilters.generalDiv);
+
+        }else if(sideMenuTabFilters.currentlyInTodayTab = true){
+            sideMenuTabFilters.generalDiv.innerHTML = "";
+            todayFilter(sideMenuTabFilters.generalDiv);
+
+        }else if(sideMenuTabFilters.currentlyInWeekTab = true){
+            sideMenuTabFilters.generalDiv.innerHTML = "";
+            weekFilter(sideMenuTabFilters.generalDiv);
+        };
+
         addButtonDomElements.addButtonDiv.style.display = "none";
     });
 
