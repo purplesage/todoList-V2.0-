@@ -1,3 +1,5 @@
+import {todoDistribution} from "./functions";
+
 const addButtonDomElements = (() => {
 
     //*Add div Element
@@ -150,6 +152,12 @@ const todoInputs = (() => {
 
         addButtonDomElements.inputMainDiv.innerHTML = "";
         addButtonDomElements.inputMainDiv.append(topInputsDiv, dueDateLabel, dueDateInput,priorityButtonsDiv);
+    });
+
+    //add todo event listener
+
+    addTodoButton.addEventListener('click', () => {
+        todoDistribution();
     });
 
     return {
