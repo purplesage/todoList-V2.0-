@@ -70,7 +70,7 @@ const addButtonDomElements = (() => {
     });
 
     //these elements will perform specific actions through event listeners.
-    return {divExitButton, toDoActionTab, projectActionTab, inputMainDiv};
+    return {divExitButton, toDoActionTab, projectActionTab, inputMainDiv, addButtonDiv};
 
 })();
 
@@ -158,6 +158,7 @@ const todoInputs = (() => {
 
     addTodoButton.addEventListener('click', () => {
         todoDistribution();
+        addButtonDomElements.addButtonDiv.style.display = "none";
     });
 
     return {

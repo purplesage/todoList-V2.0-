@@ -1,5 +1,6 @@
 import './styles/index.scss';
 import {addButtonDomElements, todoInputs, projectInputs} from './addToDoButton';
+import { format, isThisWeek, parseISO} from 'date-fns';
 
 //? This module contains the content divs
 //for the web's functions (logic), see logic.js
@@ -8,53 +9,62 @@ const todoObjectDataBase = [];
 
 
 
-const sideMenuTabDivs = (() => {
+const sideMenuTabFilters = (() => {
 
     const displayDiv = document.getElementById('content-display');
     
-    //*home content
+    //*home filter
     const homeTab = document.getElementById('home-tab');
 
-    const homeDiv = document.createElement('div');
-    homeDiv.classList = "content-grid";
-    homeDiv.textContent = "home test";
+    const generalDiv = document.createElement('ul');
+    generalDiv.classList = "content-grid";
+    generalDiv.textContent = "home test";
     //default content 
-    displayDiv.appendChild(homeDiv);
+    displayDiv.appendChild(generalDiv);
 
 
     homeTab.addEventListener('click', () => {
-        displayDiv.innerHTML = "";
-        displayDiv.appendChild(homeDiv);
+        generalDiv.innerHTML = "";
+
+        for (let i = 0; i < todoObjectDataBase.length; i++) {
+                    
+            generalDiv.appendChild(todoObjectDataBase[i].div);
+        };
+
     });
 
-    //*today content
+    //*today filter
+
+    const todaysDate = format(new Date(), "MM/dd/yyyy");
     const todayTab = document.getElementById('today-tab');
 
-    const todayDiv = document.createElement('div');
-    todayDiv.classList = "content-grid";
-    todayDiv.textContent = "today test";
-
     todayTab.addEventListener('click', () => {
-        displayDiv.innerHTML = "";
-        displayDiv.appendChild(todayDiv);
+        generalDiv.innerHTML = "";
+        const todayFilter = todoObjectDataBase.filter(todoObject => format(todoObject.dueDate, "MM/dd/yyyy") === todaysDate);
+
+        for (let i = 0; i < todayFilter.length; i++) {
+                    
+            generalDiv.appendChild(todayFilter[i].div);
+        };
     });
 
-    //*week content
+    //*week filter
     const weekTab = document.getElementById('week-tab');
 
-    const weekDiv = document.createElement('div');
-        weekDiv.classList = "content-grid";
-        weekDiv.textContent = "week test";
-
         weekTab.addEventListener('click', () => {
-        displayDiv.innerHTML = "";
-        displayDiv.appendChild(weekDiv);
+            generalDiv.innerHTML = "";
+            const weekFilter = todoObjectDataBase.filter(todoObject => isThisWeek(new Date(todoObject.dueDate)) === true);
+
+            for (let i = 0; i < weekFilter.length; i++) {
+                    
+                generalDiv.appendChild(weekFilter[i].div);
+            };
     });
 
-    return {homeDiv, todayDiv, weekDiv};
+    return {generalDiv};
 
 })(); 
 
-export { todoObjectDataBase, sideMenuTabDivs };
+export { todoObjectDataBase, sideMenuTabFilters };
 
 

@@ -1,7 +1,7 @@
 import {todoInputs, projectInputs} from './addToDoButton';
 import { todoObjectDataBase } from '.';
 import { format, isThisWeek, parseISO} from 'date-fns';
-import { sideMenuTabDivs } from '.';
+import { sideMenuTabFilters } from '.';
 
 const makeTodoObject = () => {
     const newTodoObject = {
@@ -25,7 +25,7 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 
     const todoObject = makeTodoObject();
 
-    const todoDiv = document.createElement('div');
+    const todoDiv = document.createElement('li');
         todoDiv.classList = "todo-div";
 
     const doneCheckButton = document.createElement('input');
@@ -48,6 +48,20 @@ const makeTodoDiv = (/* onLoadVersion */) => {
         deleteButtonSVG.textContent = 'DELETE-SVG';
 
         //todo: priority stuff goes here
+
+        //todo: div delete function
+
+        const deleteDiv = () =>{
+            const contentDiv = document.querySelector(".content-grid");
+
+            contentDiv.removeChild(todoDiv);
+        };
+
+        deleteButtonSVG.addEventListener('click', () => {
+            
+            deleteDiv();
+        });
+
     
     todoDiv.append(
         doneCheckButton,
@@ -76,36 +90,27 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 //this logic goes into the addTodo button.
 const todoDistribution = () => {
     const divMaker = makeTodoDiv();
-    const todaysDate = format(new Date(), "MM/dd/yyyy")
+    const todaysDate = format(new Date(), "MM/dd/yyyy");
 
-    const cloneMaker = () => {
-        let clone = divMaker.todoObject.div.cloneNode(true);
 
-        return clone;
-    };
-    
+
+    /* sideMenuTabDivs.homeDiv.appendChild(divMaker.todoObject.div); */
 
     
-    console.log(`${format(divMaker.todoObject.dueDate, "MM/dd/yyyy")} object`),
-    console.log(`${todaysDate} today`);
-
-    sideMenuTabDivs.homeDiv.appendChild(divMaker.todoObject.div);
-
-    
-    if (format(divMaker.todoObject.dueDate, "MM/dd/yyyy") === todaysDate){
+   /*  if (format(divMaker.todoObject.dueDate, "MM/dd/yyyy") === todaysDate){
         
-        /* let clone = divMaker.todoObject.div.cloneNode(true); */
-        sideMenuTabDivs.todayDiv.appendChild(cloneMaker());
+        let clone = divMaker.todoObject.div.cloneNode(true);
+        sideMenuTabDivs.todayDiv.appendChild(cloneMaker().todoObject.div);
         
     };
 
     if (isThisWeek(new Date(divMaker.todoObject.dueDate)) === true){
         
-        /* let clone = divMaker.todoObject.div.cloneNode(true); */
-        sideMenuTabDivs.weekDiv.appendChild(cloneMaker());
+        let clone = divMaker.todoObject.div.cloneNode(true);
+        sideMenuTabDivs.weekDiv.appendChild(cloneMaker().todoObject.div);
     };
 
-};
+}; */
 
 const makeProjectTab = () => {
     const projectsUl = document.getElementById('projects-ul');
