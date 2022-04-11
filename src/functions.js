@@ -1,6 +1,7 @@
 import {todoInputs, projectInputs} from './addToDoButton';
 import { todoObjectDataBase } from '.';
 import { format, isThisWeek, parseISO} from 'date-fns';
+import { sideMenuTabFilters } from '.';
 /* import { sideMenuTabFilters } from '.'; */
 
 const makeTodoObject = () => {
@@ -26,7 +27,7 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     //* todomaker function invocation and DOM elements creation
     const todoObject = makeTodoObject();
 
-    //* priority property definition and style change.
+    //* priority property definition
     const priorityRadioButtons = todoInputs.priorityButtonsDiv.getElementsByTagName('input')
     
     for (let i = 0; i < priorityRadioButtons.length; i++) {
@@ -36,8 +37,11 @@ const makeTodoDiv = (/* onLoadVersion */) => {
         };
     };
 
+    // divmaker invocation
     const todoObjectDOMelements = todoDomElementsMaker(todoObject);
     
+
+    //* priority style border setting
     if (todoObject.priority === 'low') {
         
         todoObjectDOMelements.todoDiv.style.borderLeft = 'rgb(1, 139, 1) solid 4px';
@@ -163,20 +167,24 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     
         if (todoObject.priority === 'low') {
     
-            todoDiv.style.borderLeft = 'rgb(1, 139, 1) solid 4px';
+            todoObjectDOMelements.todoDiv.style.borderLeft = 'rgb(1, 139, 1) solid 4px';
     
         }else if (todoObject.priority === 'medium') {
-            todoDiv.style.borderLeft = 'rgb(255, 234, 0) solid 4px';
+            todoObjectDOMelements.todoDiv.style.borderLeft = 'rgb(255, 234, 0) solid 4px';
             
         }else if (todoObject.priority === 'high') {
-            todoDiv.style.borderLeft = 'rgb(227, 0, 0) solid 4px';
+            todoObjectDOMelements.todoDiv.style.borderLeft = 'rgb(227, 0, 0) solid 4px';
     
         };
 
         mainGridDiv.removeChild(editInputsDiv);
 
-        todoObject.div.innerHTML = "";
-        //todoObject.div = newDomElements(todoObject);
+        todoObject.div = null;
+        todoObject.div = todoDomElementsMaker(todoObject).todoDiv;
+
+        inmediateTodoDivAppending(sideMenuTabFilters);
+
+        //todo: need to add todo special functions to the divmaker.
         
         /* ${doneCheckButton}<p>${todoObject.title}</p>${detailsButton}<p>${todoDueDateP}</p>${editButtonSVG}${deleteButtonSVG}`; */
     });
