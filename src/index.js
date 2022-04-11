@@ -1,6 +1,6 @@
 import './styles/index.scss';
 import {addButtonDomElements, todoInputs, projectInputs} from './addToDoButton';
-import { format, isThisWeek, parseISO} from 'date-fns';
+/* import { format, isThisWeek, parseISO} from 'date-fns'; */
 import { homeFilter, todayFilter, weekFilter } from './functions';
 
 //? This module contains the content divs
@@ -16,9 +16,13 @@ const sideMenuTabFilters = (() => {
 
     //* inmediate content add:
 
-    let currentlyInHomeTab = true;
-    let currentlyInTodayTab = false;
-    let currentlyInWeekTab = false;
+    
+
+    const currentSelectedTabCheck = {
+        home: true,
+        today: false,
+        week: false,
+    };
     
     //*home filter
     const homeTab = document.getElementById('home-tab');
@@ -31,9 +35,13 @@ const sideMenuTabFilters = (() => {
 
 
     homeTab.addEventListener('click', () => {
-        currentlyInHomeTab = true;
-        currentlyInTodayTab = false;
-        currentlyInWeekTab = false;
+        currentSelectedTabCheck.home = true;
+        currentSelectedTabCheck.today = false;
+        currentSelectedTabCheck.week = false;
+
+        /* console.log('homeTab' ,currentlyInHomeTab);
+        console.log('todayTab', currentlyInTodayTab);
+        console.log('weekTab',currentlyInWeekTab); */
         
         generalDiv.innerHTML = "";
 
@@ -46,9 +54,9 @@ const sideMenuTabFilters = (() => {
     const todayTab = document.getElementById('today-tab');
 
     todayTab.addEventListener('click', () => {
-        currentlyInHomeTab = false;
-        currentlyInTodayTab = true;
-        currentlyInWeekTab = false;
+        currentSelectedTabCheck.home = false;
+        currentSelectedTabCheck.today = true;
+        currentSelectedTabCheck.week = false;
 
         generalDiv.innerHTML = "";
         todayFilter(generalDiv);
@@ -57,16 +65,16 @@ const sideMenuTabFilters = (() => {
     //*week filter
     const weekTab = document.getElementById('week-tab');
 
-        weekTab.addEventListener('click', () => {
-            currentlyInHomeTab = false;
-            currentlyInTodayTab = false;
-            currentlyInWeekTab = true;
+    weekTab.addEventListener('click', () => {
+        currentSelectedTabCheck.home = false;
+        currentSelectedTabCheck.today = false;
+        currentSelectedTabCheck.week = true;
 
             generalDiv.innerHTML = "";
             weekFilter(generalDiv);
     });
 
-    return {generalDiv, currentlyInHomeTab, currentlyInTodayTab, currentlyInWeekTab};
+    return {generalDiv, currentSelectedTabCheck};
 
 })(); 
 
