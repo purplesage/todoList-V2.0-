@@ -50,8 +50,36 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 
     //todo: priority stuff goes here
 
-    //* todo div and todo object delete
+    //todo: details div:
 
+    const mainGridDiv = document.getElementById('main-grid');
+
+    const detailsDiv = document.createElement('div');
+    detailsDiv.classList = "details-div";
+
+    const detailsTitle = document.createElement('p');
+    detailsTitle.textContent = `Title: ${todoObject.title}`;
+
+    const detailsP = document.createElement('p');
+    detailsP.textContent = `Details: ${todoObject.details}`;
+
+    const detailsExitButton = document.createElement('button');
+    detailsExitButton.textContent = 'X';
+
+    detailsExitButton.addEventListener('click', () => {
+        /* detailsDiv.style.display = 'none';  */
+        mainGridDiv.removeChild(detailsDiv);
+    });
+
+    detailsDiv.append(detailsTitle, detailsExitButton, detailsP);
+
+    detailsButton.addEventListener('click', () => {
+
+        mainGridDiv.appendChild(detailsDiv);
+
+    });
+
+    //* todo div and todo object delete
     deleteButtonSVG.addEventListener('click', () => {
 
         const deleteTodoDivAndObject = (() =>{

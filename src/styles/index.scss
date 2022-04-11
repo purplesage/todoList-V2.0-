@@ -1,3 +1,6 @@
+@use './todoDivStyle';
+
+
 //------------R-E-S-E-T---------------------------------
 /*
 html5doctor.com Reset Stylesheet
@@ -159,25 +162,7 @@ input, select {
         justify-content: center;
         align-items: center;
 
-        .content-grid {
-            background-color: rgb(255, 243, 176);
-            width: 1100px;
-            height: 600px;
-            border-radius: 2rem;
-            display: grid;
-            grid-template: repeat(10, 1fr) / 1fr;
-            padding: 15px;
-
-            li {
-                list-style-type: none;
-                display: flex;
-                align-items: center;
-                padding-left: 10px;
-                border-bottom: rgb(255, 191, 95) 2px solid;
-                gap: 20px;
-            }
-        }
-    }
+    };
 
     .add-button-div {
         display: none;

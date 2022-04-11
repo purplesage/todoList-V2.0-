@@ -14,17 +14,14 @@ const sideMenuTabFilters = (() => {
 
     const displayDiv = document.getElementById('content-display');
 
-    //* inmediate content add:
-
-    
-
+    //* object for inmediate content add:
     const currentSelectedTabCheck = {
         home: true,
         today: false,
         week: false,
     };
     
-    //*home filter
+    //*home filter and general div where todo's are appended.
     const homeTab = document.getElementById('home-tab');
 
     const generalDiv = document.createElement('ul');
@@ -38,19 +35,12 @@ const sideMenuTabFilters = (() => {
         currentSelectedTabCheck.home = true;
         currentSelectedTabCheck.today = false;
         currentSelectedTabCheck.week = false;
-
-        /* console.log('homeTab' ,currentlyInHomeTab);
-        console.log('todayTab', currentlyInTodayTab);
-        console.log('weekTab',currentlyInWeekTab); */
         
         generalDiv.innerHTML = "";
-
         homeFilter(generalDiv);
     });
 
     //*today filter
-
-    
     const todayTab = document.getElementById('today-tab');
 
     todayTab.addEventListener('click', () => {
@@ -70,8 +60,8 @@ const sideMenuTabFilters = (() => {
         currentSelectedTabCheck.today = false;
         currentSelectedTabCheck.week = true;
 
-            generalDiv.innerHTML = "";
-            weekFilter(generalDiv);
+        generalDiv.innerHTML = "";
+        weekFilter(generalDiv);
     });
 
     return {generalDiv, currentSelectedTabCheck};
