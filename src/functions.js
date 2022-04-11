@@ -50,24 +50,26 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 
     //todo: priority stuff goes here
 
-    //todo: details div:
-
+    //*details div:
+    //todo: put all of these 'functions'... IN SOME FUNCTIONS! (duh)
     const mainGridDiv = document.getElementById('main-grid');
 
     const detailsDiv = document.createElement('div');
-    detailsDiv.classList = "details-div";
+        detailsDiv.classList = "details-div";
 
     const detailsTitle = document.createElement('p');
-    detailsTitle.textContent = `Title: ${todoObject.title}`;
+        detailsTitle.textContent = `Title: ${todoObject.title}`;
 
     const detailsP = document.createElement('p');
-    detailsP.textContent = `Details: ${todoObject.details}`;
+        detailsP.textContent = `Details: ${todoObject.details}`;
 
     const detailsExitButton = document.createElement('button');
-    detailsExitButton.textContent = 'X';
+        detailsExitButton.textContent = 'X';
 
+
+    // div display and undisplay (<-is that a word? lol)
     detailsExitButton.addEventListener('click', () => {
-        /* detailsDiv.style.display = 'none';  */
+        
         mainGridDiv.removeChild(detailsDiv);
     });
 
@@ -82,15 +84,70 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     //* todo div and todo object delete
     deleteButtonSVG.addEventListener('click', () => {
 
-        const deleteTodoDivAndObject = (() =>{
-            const contentDiv = document.querySelector(".content-grid");
+        const contentDiv = document.querySelector(".content-grid");
 
-            contentDiv.removeChild(todoDiv);
-            todoObjectDataBase.splice(todoObjectDataBase.indexOf(todoObject), 1);
-        })();
+        contentDiv.removeChild(todoDiv);
+        todoObjectDataBase.splice(todoObjectDataBase.indexOf(todoObject), 1);
+        
     });
 
-    //todo: edit button logic goes here
+    //todo: edit button logic goes here (need priority stuff first)
+
+    /* const editInputsDiv = document.createElement('div');
+        editInputsDiv.classList = "edit-inputs-div";
+
+    const editExitButton = document.createElement('button');
+        editExitButton.textContent = 'X';
+
+    const editConfirmButton = document.createElement('button');
+    editConfirmButton.textContent = 'CONFIRM EDIT';
+
+
+
+    editButtonSVG.addEventListener('click', () => {
+
+        for (let key in todoObject) {
+            let descriptionElement = document.createElement('input');
+            
+            if (key === 'title') {
+                descriptionElement.setAttribute('type', 'text');
+                descriptionElement.setAttribute('placeholder', `Title: ${todoDivObject.title}`);
+                //todoDivObject.title = descriptionElement.value;
+
+            }else if (key === "description") {
+                descriptionElement.setAttribute('type', 'text');
+                descriptionElement.setAttribute('placeholder', `Description: ${todoDivObject.description}`);
+                //todoDivObject.description = descriptionElement.value;
+
+            }else if (key === 'dueDate') {
+                descriptionElement.setAttribute('type', 'date');
+                descriptionElement.value = `${todoDivObject.dueDate}`;
+                // todoDivObject.dueDate = descriptionElement.value;
+
+            }else if (key === "priority") {
+                
+                
+            }else{
+                break;
+            }
+
+            descriptionDiv.appendChild(descriptionElement);
+
+        };
+
+    }); */
+
+
+
+
+
+
+
+
+
+
+
+
 
     
     todoDiv.append(
