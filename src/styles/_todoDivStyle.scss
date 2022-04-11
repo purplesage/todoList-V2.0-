@@ -32,3 +32,14 @@
     };
 
 };
+
+.edit-inputs-div {
+    display: flex;
+    position: absolute;
+    justify-self: center;
+    align-self: center;  
+    background-color: rgb(235, 213, 114); 
+    height: 400px;
+    width: 800px;
+    flex-direction: column;
+};

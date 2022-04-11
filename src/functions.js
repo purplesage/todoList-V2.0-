@@ -23,7 +23,7 @@ const makeTodoDiv = (/* onLoadVersion */) => {
         maybe a switch statement that will change from makeTodoObject to database.forEach()
     } */
 
-    //* maker function invocation and DOM elements creation
+    //* todomaker function invocation and DOM elements creation
     const todoObject = makeTodoObject();
 
     const todoDiv = document.createElement('li');
@@ -48,13 +48,13 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     const deleteButtonSVG = document.createElement('p');
         deleteButtonSVG.textContent = 'DELETE-SVG';
 
-    //todo: priority stuff goes here
+    //* priority property definition and style change.
 
-    const priorityFilter = todoInputs.priorityButtonsDiv.getElementsByTagName('input')
+    const priorityRadioButtons = todoInputs.priorityButtonsDiv.getElementsByTagName('input')
 
-    for (let i = 0; i < priorityFilter.length; i++) {
-        if (priorityFilter[i].checked === true ) {
-            todoObject.priority = priorityFilter[i].value
+    for (let i = 0; i < priorityRadioButtons.length; i++) {
+        if (priorityRadioButtons[i].checked === true ) {
+            todoObject.priority = priorityRadioButtons[i].value
             break;
         };
     };
@@ -70,8 +70,6 @@ const makeTodoDiv = (/* onLoadVersion */) => {
         todoDiv.style.borderLeft = 'rgb(227, 0, 0) solid 4px';
 
     };
-
-
 
     //*details div:
     //todo: put all of these 'functions'... IN SOME FUNCTIONS! (duh)
@@ -114,9 +112,9 @@ const makeTodoDiv = (/* onLoadVersion */) => {
         
     });
 
-    //todo: edit button logic goes here (need priority stuff first)
+    //todo: edit button logic goes here (currently working on it)
 
-    /* const editInputsDiv = document.createElement('div');
+    const editInputsDiv = document.createElement('div');
         editInputsDiv.classList = "edit-inputs-div";
 
     const editExitButton = document.createElement('button');
@@ -126,7 +124,6 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     editConfirmButton.textContent = 'CONFIRM EDIT';
 
 
-
     editButtonSVG.addEventListener('click', () => {
 
         for (let key in todoObject) {
@@ -134,31 +131,41 @@ const makeTodoDiv = (/* onLoadVersion */) => {
             
             if (key === 'title') {
                 descriptionElement.setAttribute('type', 'text');
-                descriptionElement.setAttribute('placeholder', `Title: ${todoDivObject.title}`);
+                descriptionElement.setAttribute('placeholder', `Title: ${todoObject.title}`);
                 //todoDivObject.title = descriptionElement.value;
 
-            }else if (key === "description") {
+            }else if (key === "details") {
                 descriptionElement.setAttribute('type', 'text');
-                descriptionElement.setAttribute('placeholder', `Description: ${todoDivObject.description}`);
+                descriptionElement.setAttribute('placeholder', `Details: ${todoObject.details}`);
                 //todoDivObject.description = descriptionElement.value;
 
             }else if (key === 'dueDate') {
                 descriptionElement.setAttribute('type', 'date');
-                descriptionElement.value = `${todoDivObject.dueDate}`;
+                descriptionElement.value = `${todoObject.dueDate}`;
                 // todoDivObject.dueDate = descriptionElement.value;
 
             }else if (key === "priority") {
-                
+                descriptionElement = todoInputs.priorityButtonsDiv;
+                /* let editRadioButtons = descriptionElement.getElementsByTagName('input'); */
                 
             }else{
                 break;
             }
 
-            descriptionDiv.appendChild(descriptionElement);
+            editInputsDiv.appendChild(descriptionElement);
 
         };
 
-    }); */
+        editInputsDiv.append(editExitButton ,editConfirmButton);
+        mainGridDiv.appendChild(editInputsDiv);
+
+    });
+
+    editExitButton.addEventListener('click', () => {
+        
+        editInputsDiv.innerHTML = "";
+        mainGridDiv.removeChild(editInputsDiv);
+    });
 
 
 

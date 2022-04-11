@@ -60,7 +60,7 @@ const addButtonDomElements = (() => {
         
         //default content:
         addButtonDomElements.inputMainDiv.innerHTML = "";
-        addButtonDomElements.inputMainDiv.append(todoInputs.topInputsDiv, todoInputs.dueDateLabel, todoInputs.dueDateInput, todoInputs.priorityButtonsDiv);
+        addButtonDomElements.inputMainDiv.append(todoInputs.topInputsDiv, todoInputs.dueDateLabel, todoInputs.dueDateInput, todoInputs.priorityButtonsDiv, todoInputs.addTodoButton);
 
     });
 
@@ -151,14 +151,14 @@ const todoInputs = (() => {
         addTodoButton.setAttribute('id', 'add-todo-button');
         addTodoButton.textContent = "ADD TO DO";
     
-    priorityButtonsDiv.append(lowPriorityLabel, lowPriorityButton, mediumPriorityLabel, mediumPriorityButton, highPriorityLabel, highPriorityButton, addTodoButton);
+    priorityButtonsDiv.append(lowPriorityLabel, lowPriorityButton, mediumPriorityLabel, mediumPriorityButton, highPriorityLabel, highPriorityButton);
 
     //*tab changing event listener
 
     addButtonDomElements.toDoActionTab.addEventListener('click', () => {
 
         addButtonDomElements.inputMainDiv.innerHTML = "";
-        addButtonDomElements.inputMainDiv.append(topInputsDiv, dueDateLabel, dueDateInput,priorityButtonsDiv);
+        addButtonDomElements.inputMainDiv.append(topInputsDiv, dueDateLabel, dueDateInput,priorityButtonsDiv, addTodoButton);
     });
 
     //add todo event listener
@@ -178,10 +178,10 @@ const todoInputs = (() => {
             titleInput,
              detailsInput,
               dueDateInput,
+               addTodoButton,
             };
 
 })();
-
 
 const projectInputs = (() => {
 
