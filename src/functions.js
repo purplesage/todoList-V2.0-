@@ -50,6 +50,29 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 
     //todo: priority stuff goes here
 
+    const priorityFilter = todoInputs.priorityButtonsDiv.getElementsByTagName('input')
+
+    for (let i = 0; i < priorityFilter.length; i++) {
+        if (priorityFilter[i].checked === true ) {
+            todoObject.priority = priorityFilter[i].value
+            break;
+        };
+    };
+
+    if (todoObject.priority === 'low') {
+
+        todoDiv.style.borderLeft = 'rgb(1, 139, 1) solid 4px';
+
+    }else if (todoObject.priority === 'medium') {
+        todoDiv.style.borderLeft = 'rgb(255, 234, 0) solid 4px';
+        
+    }else if (todoObject.priority === 'high') {
+        todoDiv.style.borderLeft = 'rgb(227, 0, 0) solid 4px';
+
+    };
+
+
+
     //*details div:
     //todo: put all of these 'functions'... IN SOME FUNCTIONS! (duh)
     const mainGridDiv = document.getElementById('main-grid');

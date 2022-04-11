@@ -105,8 +105,8 @@ const todoInputs = (() => {
         dueDateInput.classList = 'due-date-input';
 
     // priority radio buttons
-    const priorityButtonsDiv = document.createElement('div');
-        priorityButtonsDiv.classList = 'priority-buttons-div';
+    const priorityButtonsDiv = document.createElement('fieldset');
+        priorityButtonsDiv.classList = 'priority-buttons-fieldset';
         priorityButtonsDiv.textContent = "Priority: "
 
     const lowPriorityLabel = document.createElement('label');
@@ -117,6 +117,8 @@ const todoInputs = (() => {
     const lowPriorityButton = document.createElement('input');
         lowPriorityButton.setAttribute('type', 'radio');
         lowPriorityButton.setAttribute('id', 'low-priority-button');
+        lowPriorityButton.setAttribute('name', 'todo-priority');
+        lowPriorityButton.setAttribute('value', 'low');
         lowPriorityButton.classList = "low-priority-button";
 
     const mediumPriorityLabel = document.createElement('label');
@@ -127,6 +129,8 @@ const todoInputs = (() => {
     const mediumPriorityButton = document.createElement('input');
         mediumPriorityButton.setAttribute('type', 'radio');
         mediumPriorityButton.setAttribute('id', 'medium-priority-button');
+        mediumPriorityButton.setAttribute('name', 'todo-priority');
+        mediumPriorityButton.setAttribute('value', 'medium');
         mediumPriorityButton.classList = "medium-priority-button";
     
     const highPriorityLabel = document.createElement('label');
@@ -137,6 +141,8 @@ const todoInputs = (() => {
     const highPriorityButton = document.createElement('input');
         highPriorityButton.setAttribute('type', 'radio');
         highPriorityButton.setAttribute('id', 'high-priority-button');
+        highPriorityButton.setAttribute('name', 'todo-priority');
+        highPriorityButton.setAttribute('value', 'high');
         highPriorityButton.classList = "high-priority-button";
     
     // add todo button
@@ -172,7 +178,6 @@ const todoInputs = (() => {
             titleInput,
              detailsInput,
               dueDateInput,
-               priorityButtonsDiv,
             };
 
 })();
