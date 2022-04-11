@@ -23,6 +23,7 @@ const makeTodoDiv = (/* onLoadVersion */) => {
         maybe a switch statement that will change from makeTodoObject to database.forEach()
     } */
 
+    //* maker function invocation and DOM elements creation
     const todoObject = makeTodoObject();
 
     const todoDiv = document.createElement('li');
@@ -47,21 +48,21 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     const deleteButtonSVG = document.createElement('p');
         deleteButtonSVG.textContent = 'DELETE-SVG';
 
-        //todo: priority stuff goes here
+    //todo: priority stuff goes here
 
-        //* div/object delete
+    //* todo div and todo object delete
 
-        const deleteDiv = () =>{
+    deleteButtonSVG.addEventListener('click', () => {
+
+        const deleteTodoDivAndObject = (() =>{
             const contentDiv = document.querySelector(".content-grid");
 
             contentDiv.removeChild(todoDiv);
             todoObjectDataBase.splice(todoObjectDataBase.indexOf(todoObject), 1);
-        };
+        })();
+    });
 
-        deleteButtonSVG.addEventListener('click', () => {
-            
-            deleteDiv();
-        });
+    //todo: edit button logic goes here
 
     
     todoDiv.append(
@@ -89,29 +90,6 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 };
 
 //this logic goes into the addTodo button.
-const todoDistribution = () => {
-    const divMaker = makeTodoDiv();
-    const todaysDate = format(new Date(), "MM/dd/yyyy");
-
-
-
-    /* sideMenuTabDivs.homeDiv.appendChild(divMaker.todoObject.div); */
-
-    
-    /* if (format(divMaker.todoObject.dueDate, "MM/dd/yyyy") === todaysDate){
-        
-        let clone = divMaker.todoObject.div.cloneNode(true);
-        sideMenuTabDivs.todayDiv.appendChild(cloneMaker().todoObject.div);
-        
-    };
-
-    if (isThisWeek(new Date(divMaker.todoObject.dueDate)) === true){
-        
-        let clone = divMaker.todoObject.div.cloneNode(true);
-        sideMenuTabDivs.weekDiv.appendChild(cloneMaker().todoObject.div);
-    }; */
-
-};
 
 const makeProjectTab = () => {
     const projectsUl = document.getElementById('projects-ul');
@@ -155,9 +133,35 @@ const weekFilter = (div) => {
     };
 };
 
+//---------------------------------------------
 
+const inmediateTodoDivAppending = (objectDiv) => {
 
+    /* appends todo Div to the main content div depending
+     on which sidemenu tab is currently pressed. */
 
+    if (objectDiv.currentSelectedTabCheck.home === true){
+        objectDiv.generalDiv.innerHTML = "";
+        homeFilter(objectDiv.generalDiv);
 
+    };
 
-export {todoDistribution, homeFilter, todayFilter, weekFilter};
+    if(objectDiv.currentSelectedTabCheck.today === true){
+        objectDiv.generalDiv.innerHTML = "";
+        todayFilter(objectDiv.generalDiv);
+    };
+    
+    if(objectDiv.currentSelectedTabCheck.week === true){
+        objectDiv.generalDiv.innerHTML = "";
+        weekFilter(objectDiv.generalDiv);
+    };
+
+}
+
+export {
+    makeTodoDiv,
+     homeFilter,
+      todayFilter,
+       weekFilter,
+        inmediateTodoDivAppending
+        };

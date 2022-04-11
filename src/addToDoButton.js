@@ -1,4 +1,4 @@
-import {todoDistribution, homeFilter, todayFilter, weekFilter} from "./functions";
+import {makeTodoDiv, homeFilter, todayFilter, weekFilter, inmediateTodoDivAppending} from "./functions";
 import { sideMenuTabFilters } from ".";
 
 const addButtonDomElements = (() => {
@@ -156,26 +156,10 @@ const todoInputs = (() => {
     });
 
     //add todo event listener
-
     addTodoButton.addEventListener('click', () => {
-        todoDistribution();
+        makeTodoDiv();
 
-        if (sideMenuTabFilters.currentSelectedTabCheck.home === true){
-            sideMenuTabFilters.generalDiv.innerHTML = "";
-            homeFilter(sideMenuTabFilters.generalDiv);
-
-            console.log(`home: ${sideMenuTabFilters.currentSelectedTabCheck.home}, today: ${sideMenuTabFilters.currentSelectedTabCheck.today}, week: ${sideMenuTabFilters.currentSelectedTabCheck.week}`);
-        };
-
-        if(sideMenuTabFilters.currentSelectedTabCheck.today === true){
-            sideMenuTabFilters.generalDiv.innerHTML = "";
-            todayFilter(sideMenuTabFilters.generalDiv);
-        };
-        
-        if(sideMenuTabFilters.currentSelectedTabCheck.week === true){
-            sideMenuTabFilters.generalDiv.innerHTML = "";
-            weekFilter(sideMenuTabFilters.generalDiv);
-        };
+        inmediateTodoDivAppending(sideMenuTabFilters);
 
         addButtonDomElements.addButtonDiv.style.display = "none";
     });
@@ -189,7 +173,7 @@ const todoInputs = (() => {
              detailsInput,
               dueDateInput,
                priorityButtonsDiv,
-    };
+            };
 
 })();
 
