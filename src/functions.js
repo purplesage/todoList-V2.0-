@@ -26,32 +26,9 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     //* todomaker function invocation and DOM elements creation
     const todoObject = makeTodoObject();
 
-    const todoDiv = document.createElement('li');
-        todoDiv.classList = "todo-div";
-
-    const doneCheckButton = document.createElement('input');
-        doneCheckButton.setAttribute('type', 'checkbox');
-        doneCheckButton.setAttribute('id', 'done-check-button');
-
-    const todoTitleP = document.createElement('p');
-        todoTitleP.textContent = `${todoObject.title}`;
-
-    const detailsButton = document.createElement('button');
-        detailsButton.textContent = 'DETAILS';  
-
-    const todoDueDateP = document.createElement('p');
-        todoDueDateP.textContent = `${format(todoObject.dueDate, "MM/dd/yyyy")}`;
-
-    const editButtonSVG = document.createElement('p');
-        editButtonSVG.textContent = 'EDIT-SVG';
-
-    const deleteButtonSVG = document.createElement('p');
-        deleteButtonSVG.textContent = 'DELETE-SVG';
-
     //* priority property definition and style change.
-
     const priorityRadioButtons = todoInputs.priorityButtonsDiv.getElementsByTagName('input')
-
+    
     for (let i = 0; i < priorityRadioButtons.length; i++) {
         if (priorityRadioButtons[i].checked === true ) {
             todoObject.priority = priorityRadioButtons[i].value
@@ -59,16 +36,18 @@ const makeTodoDiv = (/* onLoadVersion */) => {
         };
     };
 
+    const todoObjectDOMelements = todoDomElementsMaker(todoObject);
+    
     if (todoObject.priority === 'low') {
-
-        todoDiv.style.borderLeft = 'rgb(1, 139, 1) solid 4px';
-
+        
+        todoObjectDOMelements.todoDiv.style.borderLeft = 'rgb(1, 139, 1) solid 4px';
+        
     }else if (todoObject.priority === 'medium') {
-        todoDiv.style.borderLeft = 'rgb(255, 234, 0) solid 4px';
+        todoObjectDOMelements.todoDiv.style.borderLeft = 'rgb(255, 234, 0) solid 4px';
         
     }else if (todoObject.priority === 'high') {
-        todoDiv.style.borderLeft = 'rgb(227, 0, 0) solid 4px';
-
+        todoObjectDOMelements.todoDiv.style.borderLeft = 'rgb(227, 0, 0) solid 4px';
+        
     };
 
     //*details div:
@@ -96,18 +75,18 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 
     detailsDiv.append(detailsTitle, detailsExitButton, detailsP);
 
-    detailsButton.addEventListener('click', () => {
+    todoObjectDOMelements.detailsButton.addEventListener('click', () => {
 
         mainGridDiv.appendChild(detailsDiv);
 
     });
 
     //* todo div and todo object delete
-    deleteButtonSVG.addEventListener('click', () => {
+    todoObjectDOMelements.deleteButtonSVG.addEventListener('click', () => {
 
         const contentDiv = document.querySelector(".content-grid");
 
-        contentDiv.removeChild(todoDiv);
+        contentDiv.removeChild(todoObjectDOMelements.todoDiv);
         todoObjectDataBase.splice(todoObjectDataBase.indexOf(todoObject), 1);
         
     });
@@ -117,6 +96,8 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     const editInputsDiv = document.createElement('div');
         editInputsDiv.classList = "edit-inputs-div";
 
+    const editPriorityButton = todoInputs.priorityButtonsDiv;
+
     const editExitButton = document.createElement('button');
         editExitButton.textContent = 'X';
 
@@ -124,7 +105,7 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     editConfirmButton.textContent = 'CONFIRM EDIT';
 
 
-    editButtonSVG.addEventListener('click', () => {
+    todoObjectDOMelements.editButtonSVG.addEventListener('click', () => {
 
         for (let key in todoObject) {
             let descriptionElement = document.createElement('input');
@@ -144,10 +125,6 @@ const makeTodoDiv = (/* onLoadVersion */) => {
                 descriptionElement.value = `${todoObject.dueDate}`;
                 // todoDivObject.dueDate = descriptionElement.value;
 
-            }else if (key === "priority") {
-                descriptionElement = todoInputs.priorityButtonsDiv;
-                /* let editRadioButtons = descriptionElement.getElementsByTagName('input'); */
-                
             }else{
                 break;
             }
@@ -156,7 +133,7 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 
         };
 
-        editInputsDiv.append(editExitButton ,editConfirmButton);
+        editInputsDiv.append(editExitButton ,editConfirmButton, editPriorityButton);
         mainGridDiv.appendChild(editInputsDiv);
 
     });
@@ -167,42 +144,92 @@ const makeTodoDiv = (/* onLoadVersion */) => {
         mainGridDiv.removeChild(editInputsDiv);
     });
 
+    editConfirmButton.addEventListener('click', () => {
 
+        const editButtonDivInputs = editInputsDiv.getElementsByTagName('input');
 
+        todoObject.title = editButtonDivInputs[0].value;
+        todoObject.details = editButtonDivInputs[1].value;
+        todoObject.dueDate = new Date(parseISO(editButtonDivInputs[2].value));
+        
+        let editRadioButtons = editPriorityButton.getElementsByTagName('input'); 
 
-
-
-
-
-
-
-
-
-
-    
-    todoDiv.append(
-        doneCheckButton,
-         todoTitleP,
-          detailsButton,
-           todoDueDateP,
-            editButtonSVG,
-             deleteButtonSVG);
-
-    todoObject.div = todoDiv;
-
-    todoObjectDataBase.push(todoObject);
-
-    return {
-        todoDiv,
-         doneCheckButton,
-          todoTitleP,
-           detailsButton,
-            todoDueDateP,
-             editButtonSVG,
-              deleteButtonSVG,
-                todoObject,
+        for (let i = 0; i < editRadioButtons.length; i++) {
+            if (editRadioButtons[i].checked === true ) {
+                todoObject.priority = editRadioButtons[i].value
+                break;
             };
+        };
+    
+        if (todoObject.priority === 'low') {
+    
+            todoDiv.style.borderLeft = 'rgb(1, 139, 1) solid 4px';
+    
+        }else if (todoObject.priority === 'medium') {
+            todoDiv.style.borderLeft = 'rgb(255, 234, 0) solid 4px';
+            
+        }else if (todoObject.priority === 'high') {
+            todoDiv.style.borderLeft = 'rgb(227, 0, 0) solid 4px';
+    
+        };
+
+        mainGridDiv.removeChild(editInputsDiv);
+
+        todoObject.div.innerHTML = "";
+        //todoObject.div = newDomElements(todoObject);
+        
+        /* ${doneCheckButton}<p>${todoObject.title}</p>${detailsButton}<p>${todoDueDateP}</p>${editButtonSVG}${deleteButtonSVG}`; */
+    });
+
 };
+
+
+const todoDomElementsMaker = (TDobject) => {
+
+    const todoDiv = document.createElement('li');
+        todoDiv.classList = "todo-div";
+
+    const doneCheckButton = document.createElement('input');
+        doneCheckButton.setAttribute('type', 'checkbox');
+        doneCheckButton.setAttribute('id', 'done-check-button');
+
+    const todoTitleP = document.createElement('p');
+        todoTitleP.textContent = `${TDobject.title}`;
+
+    const detailsButton = document.createElement('button');
+        detailsButton.textContent = 'DETAILS';  
+
+    const todoDueDateP = document.createElement('p');
+        todoDueDateP.textContent = `${format(TDobject.dueDate, "MM/dd/yyyy")}`;
+
+    const editButtonSVG = document.createElement('p');
+        editButtonSVG.textContent = 'EDIT-SVG';
+
+    const deleteButtonSVG = document.createElement('p');
+        deleteButtonSVG.textContent = 'DELETE-SVG';
+
+        todoDiv.append(
+            doneCheckButton,
+             todoTitleP,
+              detailsButton,
+               todoDueDateP,
+                editButtonSVG,
+                 deleteButtonSVG);
+    
+        TDobject.div = todoDiv;
+    
+        todoObjectDataBase.push(TDobject);
+
+        return {
+            todoDiv,
+             doneCheckButton,
+              todoTitleP,
+               detailsButton,
+                todoDueDateP,
+                 editButtonSVG,
+                  deleteButtonSVG,
+                };
+}
 
 //this logic goes into the addTodo button.
 
