@@ -22,9 +22,10 @@ const projectFilter = (TDobject) => {
 
     if (liAlreadyExists === false) {
 
-        const projectsUl = document.getElementById('projects-ul');
 
-        const newProjectTab = document.createElement('li');
+        let projectsUl = document.getElementById('projects-ul');
+
+        let newProjectTab = document.createElement('li');
     
         newProjectTab.textContent = `${TDobject.projectName}`;
     
@@ -34,45 +35,24 @@ const projectFilter = (TDobject) => {
 
         newProjectTab.addEventListener('click', () => {
 
-            let projectFilter = todoObjectDataBase.filter(todoObject => todoObject.projectName === newProjectTab.textContent);
+            sideMenuTabFilters.currentSelectedTabCheck.home = false;
+            sideMenuTabFilters.currentSelectedTabCheck.today = false;
+            sideMenuTabFilters.currentSelectedTabCheck.week = false;
 
-            for (let i = 0; i < projectFilter.length; i++) {
-                sideMenuTabFilters.generalDiv.appendChild(projectFilter[i].div);
+            sideMenuTabFilters.generalDiv.innerHTML = "";
+
+            let filter = todoObjectDataBase.filter(todoObject => todoObject.projectName === newProjectTab.textContent);
+
+            console.log(filter);
+            console.log("home",sideMenuTabFilters.currentSelectedTabCheck.home);
+            console.log("today",sideMenuTabFilters.currentSelectedTabCheck.today);
+            console.log("week",sideMenuTabFilters.currentSelectedTabCheck.week);
+            
+            for (let i = 0; i < filter.length; i++) {
+                sideMenuTabFilters.generalDiv.appendChild(filter[i].div);
             };
-
         });
-
-
     };
-    
 };
-
-
-
-
-
-
-/* const emptyProjectContent = () => {
-
-    const containerDiv = document.createElement('div');
-    containerDiv.style.display = "flex";
-    containerDiv.style.flexDirection = 'column';
-
-    const warningText = document.createElement('p');
-        warningText.textContent = 'This project is empty!';
-
-    const suggestionP = document.createElement('p');
-        suggestionP.textContent = "Create a new to-do item or delete this project"
-
-    const deleteProjectButton = document.createElement('button');
-    deleteProjectButton.textContent = 'Delete Project';
-
-    containerDiv.append(warningText, suggestionP, deleteButton);
-
-    //todo: delete project button logic.
-
-}; */
-
-
 
 export { projectFilter };

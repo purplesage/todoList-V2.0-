@@ -72,8 +72,11 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 
     };
 
-    //*project filter call
+    todoObject.div = todoDiv;
 
+    todoObjectDataBase.push(todoObject);
+
+    //*project filter call
     if (todoObject.projectName !== "") {
 
         projectFilter(todoObject);
@@ -222,9 +225,7 @@ const makeTodoDiv = (/* onLoadVersion */) => {
             editButtonSVG,
              deleteButtonSVG);
 
-    todoObject.div = todoDiv;
-
-    todoObjectDataBase.push(todoObject);
+    
 };
 
 
