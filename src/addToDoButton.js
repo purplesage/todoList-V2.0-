@@ -1,5 +1,7 @@
-import {makeTodoDiv, homeFilter, todayFilter, weekFilter, inmediateTodoDivAppending} from "./functions";
+import {makeTodoDiv} from "./functions";
 import { sideMenuTabFilters } from ".";
+import { inmediateTodoDivAppending } from "./todoFilters";
+import { makeProjectTab } from "./projectLogic";
 
 const addButtonDomElements = (() => {
 
@@ -202,7 +204,13 @@ const projectInputs = (() => {
 
         });
 
-        return {createProjectButton};
+        createProjectButton.addEventListener('click', () => {
+            makeProjectTab();
+            addButtonDomElements.addButtonDiv.style.display = "none";
+
+        });
+
+        return {projectNameInput};
 })();
 
 export {addButtonDomElements, todoInputs, projectInputs};
