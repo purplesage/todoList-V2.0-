@@ -1,6 +1,5 @@
 import './styles/index.scss';
 import {addButtonDomElements, todoInputs, projectInputs} from './addToDoButton';
-/* import { format, isThisWeek, parseISO} from 'date-fns'; */
 import { homeFilter, todayFilter, weekFilter } from './todoFilters';
 
 //? This module contains the content divs

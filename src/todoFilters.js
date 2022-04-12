@@ -33,7 +33,6 @@ const weekFilter = (div) => {
     };
 };
 
-//---------------------------------------------
 
 const inmediateTodoDivAppending = (objectDiv) => {
 
@@ -43,7 +42,6 @@ const inmediateTodoDivAppending = (objectDiv) => {
     if (objectDiv.currentSelectedTabCheck.home === true){
         objectDiv.generalDiv.innerHTML = "";
         homeFilter(objectDiv.generalDiv);
-
     };
 
     if(objectDiv.currentSelectedTabCheck.today === true){
