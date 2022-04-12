@@ -7,8 +7,6 @@ import { homeFilter, todayFilter, weekFilter } from './todoFilters';
 
 const todoObjectDataBase = [];
 
-
-
 const sideMenuTabFilters = (() => {
 
     const displayDiv = document.getElementById('content-display');

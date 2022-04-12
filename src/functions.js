@@ -9,6 +9,7 @@ const makeTodoObject = () => {
         dueDate: new Date(parseISO(todoInputs.dueDateInput.value)),
         priority: null,
         div: null,
+        projectName: todoInputs.projectInput.value,
     };
 
     return newTodoObject;

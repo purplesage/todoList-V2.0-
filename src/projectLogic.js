@@ -1,5 +1,5 @@
 
-import {projectInputs} from './addToDoButton';
+import {/* projectInputs, */ /* todoInputs */} from './addToDoButton';
 
 
 const projectLiDatabase = [];
@@ -29,8 +29,32 @@ const makeProjectTab = () => {
         projectsUl.appendChild(newProjectTab);
 
         projectLiDatabase.push(newProjectTab.textContent);
+
     };
     
 };
+
+const emptyProjectContent = () => {
+
+    const containerDiv = document.createElement('div');
+    containerDiv.style.display = "flex";
+    containerDiv.style.flexDirection = 'column';
+
+    const warningText = document.createElement('p');
+        warningText.textContent = 'This project is empty!';
+
+    const suggestionP = document.createElement('p');
+        suggestionP.textContent = "Create a new to-do item or delete this project"
+
+    const deleteProjectButton = document.createElement('button');
+    deleteProjectButton.textContent = 'Delete Project';
+
+    containerDiv.append(warningText, suggestionP, deleteButton);
+
+    //todo: delete project button logic.
+
+};
+
+
 
 export { makeProjectTab };

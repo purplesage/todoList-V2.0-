@@ -18,29 +18,13 @@ const addButtonDomElements = (() => {
         header.classList = 'header-div';
 
     const headerP = document.createElement('p');
-        headerP.textContent = 'Create a new...';
+        headerP.textContent = 'Create new TO-DO';
     
     const divExitButton = document.createElement('button');
         divExitButton.textContent = "X";
 
     header.append(headerP, divExitButton);
 
-    //*action options
-    const actionsListDiv = document.createElement('div');
-        actionsListDiv.classList = "actions-list-div";
-
-    const actionsUl = document.createElement('ul');
-        actionsUl.classList = "actions-ul";
-
-    const toDoActionTab = document.createElement('li');
-        toDoActionTab.textContent = 'To Do';
-
-    const projectActionTab = document.createElement('li');
-        projectActionTab.textContent = 'Project';
-
-    actionsUl.append(toDoActionTab, projectActionTab);   
-
-    actionsListDiv.appendChild(actionsUl);
 
     //*input div basic element
 
@@ -49,7 +33,6 @@ const addButtonDomElements = (() => {
 
     //*appending dom elements to main div
     addButtonDiv.appendChild(header);
-    addButtonDiv.appendChild(actionsListDiv);
     addButtonDiv.appendChild(inputMainDiv);
 
     //appends add button div to main-grid div.
@@ -73,7 +56,7 @@ const addButtonDomElements = (() => {
     });
 
     //these elements will perform specific actions through event listeners.
-    return {divExitButton, toDoActionTab, projectActionTab, inputMainDiv, addButtonDiv};
+    return { divExitButton, inputMainDiv, addButtonDiv };
 
 })();
 
@@ -94,6 +77,13 @@ const todoInputs = (() => {
         detailsInput.setAttribute('id', 'details-input');
         detailsInput.classList = "details-input";
     topInputsDiv.appendChild(detailsInput);
+
+    const projectInput = document.createElement('input');
+        projectInput.setAttribute('placeholder', 'Project name: ');
+        projectInput.setAttribute('type', 'text');
+        projectInput.setAttribute('id', 'project-input');
+        projectInput.classList = "details-input";
+    topInputsDiv.appendChild(projectInput);
 
     //* bottom inputs
     const dueDateLabel = document.createElement('label');
@@ -153,15 +143,15 @@ const todoInputs = (() => {
         addTodoButton.setAttribute('id', 'add-todo-button');
         addTodoButton.textContent = "ADD TO DO";
     
-    priorityButtonsDiv.append(lowPriorityLabel, lowPriorityButton, mediumPriorityLabel, mediumPriorityButton, highPriorityLabel, highPriorityButton);
+    priorityButtonsDiv.append(
+        lowPriorityLabel,
+         lowPriorityButton,
+          mediumPriorityLabel,
+           mediumPriorityButton,
+            highPriorityLabel,
+             highPriorityButton);
 
-    //*tab changing event listener
-
-    addButtonDomElements.toDoActionTab.addEventListener('click', () => {
-
-        addButtonDomElements.inputMainDiv.innerHTML = "";
-        addButtonDomElements.inputMainDiv.append(topInputsDiv, dueDateLabel, dueDateInput,priorityButtonsDiv, addTodoButton);
-    });
+    
 
     //add todo event listener
     addTodoButton.addEventListener('click', () => {
@@ -180,37 +170,10 @@ const todoInputs = (() => {
             titleInput,
              detailsInput,
               dueDateInput,
-               addTodoButton,
+               projectInput,
+                addTodoButton,
             };
 
 })();
 
-const projectInputs = (() => {
-
-    const projectNameInput = document.createElement('textarea');
-        projectNameInput.setAttribute('placeholder', 'Project name: ');
-        projectNameInput.setAttribute('id', 'project-name-input');
-        projectNameInput.classList = "project-name-input";
-
-    const createProjectButton = document.createElement('button');
-        createProjectButton.textContent = "Create Project";
-        createProjectButton.classList = "create-project-button";
-        createProjectButton.setAttribute('id', 'create-project-button');
-
-        addButtonDomElements.projectActionTab.addEventListener('click', () => {
-        
-            addButtonDomElements.inputMainDiv.innerHTML = "";
-            addButtonDomElements.inputMainDiv.append(projectNameInput, createProjectButton);
-
-        });
-
-        createProjectButton.addEventListener('click', () => {
-            makeProjectTab();
-            addButtonDomElements.addButtonDiv.style.display = "none";
-
-        });
-
-        return {projectNameInput};
-})();
-
-export {addButtonDomElements, todoInputs, projectInputs};
+export {addButtonDomElements, todoInputs, /* projectInputs */};
