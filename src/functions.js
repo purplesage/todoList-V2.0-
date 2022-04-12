@@ -129,6 +129,8 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 
     editButtonSVG.addEventListener('click', () => {
 
+        editInputsDiv.innerHTML = "";
+
         for (let key in todoObject) {
             let descriptionElement = document.createElement('input');
             
@@ -216,21 +218,12 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     todoObject.div = todoDiv;
 
     todoObjectDataBase.push(todoObject);
-
-    return {
-        todoDiv,
-         doneCheckButton,
-          todoTitleP,
-           detailsButton,
-            todoDueDateP,
-             editButtonSVG,
-              deleteButtonSVG,
-                todoObject,
-            };
 };
 
 //this logic goes into the addTodo button.
 
+
+//* project 'li' maker.
 const makeProjectTab = () => {
     const projectsUl = document.getElementById('projects-ul');
 
