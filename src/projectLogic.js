@@ -1,21 +1,23 @@
 
 import {/* projectInputs, */ /* todoInputs */} from './addToDoButton';
+import { todoObjectDataBase } from '.';
+import { sideMenuTabFilters } from '.';
 
 
-const projectLiDatabase = [];
+const projectLiDataBase = [];
 
 //* project 'li' maker.
-const makeProjectTab = () => {
+const projectFilter = (TDobject) => {
 
     let liAlreadyExists = false;
 
-    if (projectLiDatabase.length > 0) {
-
-        for (let i = 0; i <= projectLiDatabase.length; i++) {
-            if (projectLiDatabase[i] === projectInputs.projectNameInput.value) {
+    if (projectLiDataBase.length >= 1) {
+        
+        for (let i = 0; i <= projectLiDataBase.length; i++) {
+            if (projectLiDataBase[i] === TDobject.projectName) {
                 liAlreadyExists = true;
             };
-        };
+        } ;
     };
 
     if (liAlreadyExists === false) {
@@ -24,17 +26,33 @@ const makeProjectTab = () => {
 
         const newProjectTab = document.createElement('li');
     
-        newProjectTab.textContent = `${projectInputs.projectNameInput.value}`;
+        newProjectTab.textContent = `${TDobject.projectName}`;
     
         projectsUl.appendChild(newProjectTab);
 
-        projectLiDatabase.push(newProjectTab.textContent);
+        projectLiDataBase.push(newProjectTab.textContent);
+
+        newProjectTab.addEventListener('click', () => {
+
+            let projectFilter = todoObjectDataBase.filter(todoObject => todoObject.projectName === newProjectTab.textContent);
+
+            for (let i = 0; i < projectFilter.length; i++) {
+                sideMenuTabFilters.generalDiv.appendChild(projectFilter[i].div);
+            };
+
+        });
+
 
     };
     
 };
 
-const emptyProjectContent = () => {
+
+
+
+
+
+/* const emptyProjectContent = () => {
 
     const containerDiv = document.createElement('div');
     containerDiv.style.display = "flex";
@@ -53,8 +71,8 @@ const emptyProjectContent = () => {
 
     //todo: delete project button logic.
 
-};
+}; */
 
 
 
-export { makeProjectTab };
+export { projectFilter };

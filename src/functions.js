@@ -1,6 +1,7 @@
 import {todoInputs} from './addToDoButton';
 import { todoObjectDataBase } from '.';
 import { format, parseISO} from 'date-fns';
+import { projectFilter } from './projectLogic';
 
 const makeTodoObject = () => {
     const newTodoObject = {
@@ -69,6 +70,13 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     }else if (todoObject.priority === 'high') {
         todoDiv.style.borderLeft = 'rgb(227, 0, 0) solid 4px';
 
+    };
+
+    //*project filter call
+
+    if (todoObject.projectName !== "") {
+
+        projectFilter(todoObject);
     };
 
     //*details div:
