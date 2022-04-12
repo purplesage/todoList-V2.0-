@@ -27,9 +27,32 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     //* todomaker function invocation and DOM elements creation
     const todoObject = makeTodoObject();
 
-    //* priority property definition
+    const todoDiv = document.createElement('li');
+        todoDiv.classList = "todo-div";
+
+    const doneCheckButton = document.createElement('input');
+        doneCheckButton.setAttribute('type', 'checkbox');
+        doneCheckButton.setAttribute('id', 'done-check-button');
+
+    const todoTitleP = document.createElement('p');
+        todoTitleP.textContent = `${todoObject.title}`;
+
+    const detailsButton = document.createElement('button');
+        detailsButton.textContent = 'DETAILS';  
+
+    const todoDueDateP = document.createElement('p');
+        todoDueDateP.textContent = `${format(todoObject.dueDate, "MM/dd/yyyy")}`;
+
+    const editButtonSVG = document.createElement('p');
+        editButtonSVG.textContent = 'EDIT-SVG';
+
+    const deleteButtonSVG = document.createElement('p');
+        deleteButtonSVG.textContent = 'DELETE-SVG';
+
+    //* priority property definition and style change.
+
     const priorityRadioButtons = todoInputs.priorityButtonsDiv.getElementsByTagName('input')
-    
+
     for (let i = 0; i < priorityRadioButtons.length; i++) {
         if (priorityRadioButtons[i].checked === true ) {
             todoObject.priority = priorityRadioButtons[i].value
@@ -37,21 +60,16 @@ const makeTodoDiv = (/* onLoadVersion */) => {
         };
     };
 
-    // divmaker invocation
-    const todoObjectDOMelements = todoDomElementsMaker(todoObject);
-    
-
-    //* priority style border setting
     if (todoObject.priority === 'low') {
-        
-        todoObjectDOMelements.todoDiv.style.borderLeft = 'rgb(1, 139, 1) solid 4px';
-        
+
+        todoDiv.style.borderLeft = 'rgb(1, 139, 1) solid 4px';
+
     }else if (todoObject.priority === 'medium') {
-        todoObjectDOMelements.todoDiv.style.borderLeft = 'rgb(255, 234, 0) solid 4px';
+        todoDiv.style.borderLeft = 'rgb(255, 234, 0) solid 4px';
         
     }else if (todoObject.priority === 'high') {
-        todoObjectDOMelements.todoDiv.style.borderLeft = 'rgb(227, 0, 0) solid 4px';
-        
+        todoDiv.style.borderLeft = 'rgb(227, 0, 0) solid 4px';
+
     };
 
     //*details div:
@@ -71,7 +89,7 @@ const makeTodoDiv = (/* onLoadVersion */) => {
         detailsExitButton.textContent = 'X';
 
 
-    // div display and undisplay (<-is that a word? lol)
+    // details div display and undisplay (<-is that a word? lol)
     detailsExitButton.addEventListener('click', () => {
         
         mainGridDiv.removeChild(detailsDiv);
@@ -79,23 +97,23 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 
     detailsDiv.append(detailsTitle, detailsExitButton, detailsP);
 
-    todoObjectDOMelements.detailsButton.addEventListener('click', () => {
+    detailsButton.addEventListener('click', () => {
 
         mainGridDiv.appendChild(detailsDiv);
 
     });
 
     //* todo div and todo object delete
-    todoObjectDOMelements.deleteButtonSVG.addEventListener('click', () => {
+    deleteButtonSVG.addEventListener('click', () => {
 
         const contentDiv = document.querySelector(".content-grid");
 
-        contentDiv.removeChild(todoObjectDOMelements.todoDiv);
+        contentDiv.removeChild(todoDiv);
         todoObjectDataBase.splice(todoObjectDataBase.indexOf(todoObject), 1);
         
     });
 
-    //todo: edit button logic goes here (currently working on it)
+    //*edit button---------------------
 
     const editInputsDiv = document.createElement('div');
         editInputsDiv.classList = "edit-inputs-div";
@@ -109,7 +127,7 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     editConfirmButton.textContent = 'CONFIRM EDIT';
 
 
-    todoObjectDOMelements.editButtonSVG.addEventListener('click', () => {
+    editButtonSVG.addEventListener('click', () => {
 
         for (let key in todoObject) {
             let descriptionElement = document.createElement('input');
@@ -156,7 +174,7 @@ const makeTodoDiv = (/* onLoadVersion */) => {
         todoObject.details = editButtonDivInputs[1].value;
         todoObject.dueDate = new Date(parseISO(editButtonDivInputs[2].value));
         
-        let editRadioButtons = editPriorityButton.getElementsByTagName('input'); 
+        const editRadioButtons = editPriorityButton.getElementsByTagName('input'); 
 
         for (let i = 0; i < editRadioButtons.length; i++) {
             if (editRadioButtons[i].checked === true ) {
@@ -167,77 +185,49 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     
         if (todoObject.priority === 'low') {
     
-            todoObjectDOMelements.todoDiv.style.borderLeft = 'rgb(1, 139, 1) solid 4px';
+            todoDiv.style.borderLeft = 'rgb(1, 139, 1) solid 4px';
     
         }else if (todoObject.priority === 'medium') {
-            todoObjectDOMelements.todoDiv.style.borderLeft = 'rgb(255, 234, 0) solid 4px';
+            todoDiv.style.borderLeft = 'rgb(255, 234, 0) solid 4px';
             
         }else if (todoObject.priority === 'high') {
-            todoObjectDOMelements.todoDiv.style.borderLeft = 'rgb(227, 0, 0) solid 4px';
+            todoDiv.style.borderLeft = 'rgb(227, 0, 0) solid 4px';
     
         };
 
-        mainGridDiv.removeChild(editInputsDiv);
+        todoTitleP.textContent = todoObject.title;
+        todoDueDateP.textContent = format(todoObject.dueDate, "MM/dd/yyyy");
 
-        todoObject.div = null;
-        todoObject.div = todoDomElementsMaker(todoObject).todoDiv;
-
-        inmediateTodoDivAppending(sideMenuTabFilters);
-
-        //todo: need to add todo special functions to the divmaker.
+        detailsTitle.textContent = `Title: ${todoObject.title}`;
+        detailsP.textContent = `Details: ${todoObject.details}`;
         
-        /* ${doneCheckButton}<p>${todoObject.title}</p>${detailsButton}<p>${todoDueDateP}</p>${editButtonSVG}${deleteButtonSVG}`; */
+        
+        mainGridDiv.removeChild(editInputsDiv);
     });
+    
+    todoDiv.append(
+        doneCheckButton,
+         todoTitleP,
+          detailsButton,
+           todoDueDateP,
+            editButtonSVG,
+             deleteButtonSVG);
 
+    todoObject.div = todoDiv;
+
+    todoObjectDataBase.push(todoObject);
+
+    return {
+        todoDiv,
+         doneCheckButton,
+          todoTitleP,
+           detailsButton,
+            todoDueDateP,
+             editButtonSVG,
+              deleteButtonSVG,
+                todoObject,
+            };
 };
-
-
-const todoDomElementsMaker = (TDobject) => {
-
-    const todoDiv = document.createElement('li');
-        todoDiv.classList = "todo-div";
-
-    const doneCheckButton = document.createElement('input');
-        doneCheckButton.setAttribute('type', 'checkbox');
-        doneCheckButton.setAttribute('id', 'done-check-button');
-
-    const todoTitleP = document.createElement('p');
-        todoTitleP.textContent = `${TDobject.title}`;
-
-    const detailsButton = document.createElement('button');
-        detailsButton.textContent = 'DETAILS';  
-
-    const todoDueDateP = document.createElement('p');
-        todoDueDateP.textContent = `${format(TDobject.dueDate, "MM/dd/yyyy")}`;
-
-    const editButtonSVG = document.createElement('p');
-        editButtonSVG.textContent = 'EDIT-SVG';
-
-    const deleteButtonSVG = document.createElement('p');
-        deleteButtonSVG.textContent = 'DELETE-SVG';
-
-        todoDiv.append(
-            doneCheckButton,
-             todoTitleP,
-              detailsButton,
-               todoDueDateP,
-                editButtonSVG,
-                 deleteButtonSVG);
-    
-        TDobject.div = todoDiv;
-    
-        todoObjectDataBase.push(TDobject);
-
-        return {
-            todoDiv,
-             doneCheckButton,
-              todoTitleP,
-               detailsButton,
-                todoDueDateP,
-                 editButtonSVG,
-                  deleteButtonSVG,
-                };
-}
 
 //this logic goes into the addTodo button.
 
