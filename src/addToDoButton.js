@@ -1,4 +1,4 @@
-import {makeTodoDiv} from "./functions";
+import {makeTodoDiv} from "./todoMaker";
 import { sideMenuTabFilters } from ".";
 import { inmediateTodoDivAppending } from "./todoFilters";
 import { makeProjectTab } from "./projectLogic";
