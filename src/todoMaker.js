@@ -8,9 +8,9 @@ const makeTodoObject = () => {
         title: todoInputs.titleInput.value,
         details: todoInputs.detailsInput.value,
         dueDate: new Date(parseISO(todoInputs.dueDateInput.value)),
+        projectName: todoInputs.projectInput.value,
         priority: null,
         div: null,
-        projectName: todoInputs.projectInput.value,
     };
 
     return newTodoObject;
@@ -50,7 +50,6 @@ const makeTodoDiv = (/* onLoadVersion */) => {
         deleteButtonSVG.textContent = 'DELETE-SVG';
 
     //* priority property definition and style change.
-
     const priorityRadioButtons = todoInputs.priorityButtonsDiv.getElementsByTagName('input')
 
     for (let i = 0; i < priorityRadioButtons.length; i++) {
@@ -124,7 +123,6 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     });
 
     //*edit button---------------------
-
     const editInputsDiv = document.createElement('div');
         editInputsDiv.classList = "edit-inputs-div";
 
@@ -136,7 +134,6 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     const editConfirmButton = document.createElement('button');
     editConfirmButton.textContent = 'CONFIRM EDIT';
 
-
     editButtonSVG.addEventListener('click', () => {
 
         editInputsDiv.innerHTML = "";
@@ -147,21 +144,22 @@ const makeTodoDiv = (/* onLoadVersion */) => {
             if (key === 'title') {
                 descriptionElement.setAttribute('type', 'text');
                 descriptionElement.setAttribute('placeholder', `Title: ${todoObject.title}`);
-                //todoDivObject.title = descriptionElement.value;
 
             }else if (key === "details") {
                 descriptionElement.setAttribute('type', 'text');
                 descriptionElement.setAttribute('placeholder', `Details: ${todoObject.details}`);
-                //todoDivObject.description = descriptionElement.value;
 
             }else if (key === 'dueDate') {
                 descriptionElement.setAttribute('type', 'date');
                 descriptionElement.value = `${todoObject.dueDate}`;
-                // todoDivObject.dueDate = descriptionElement.value;
+                
+            }else if (key === 'projectName') {
+                descriptionElement.setAttribute('type', 'text');
+                descriptionElement.setAttribute('placeholder', `Project Name: ${todoObject.projectName}`);
 
             }else{
                 break;
-            }
+            };
 
             editInputsDiv.appendChild(descriptionElement);
 
@@ -185,6 +183,7 @@ const makeTodoDiv = (/* onLoadVersion */) => {
         todoObject.title = editButtonDivInputs[0].value;
         todoObject.details = editButtonDivInputs[1].value;
         todoObject.dueDate = new Date(parseISO(editButtonDivInputs[2].value));
+        todoObject.projectName = editButtonDivInputs[3].value;
         
         const editRadioButtons = editPriorityButton.getElementsByTagName('input'); 
 
@@ -212,7 +211,11 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 
         detailsTitle.textContent = `Title: ${todoObject.title}`;
         detailsP.textContent = `Details: ${todoObject.details}`;
-        
+
+        if (todoObject.projectName !== "") {
+
+            projectFilter(todoObject);
+        };
         
         mainGridDiv.removeChild(editInputsDiv);
     });
@@ -224,9 +227,6 @@ const makeTodoDiv = (/* onLoadVersion */) => {
            todoDueDateP,
             editButtonSVG,
              deleteButtonSVG);
-
-    
 };
-
 
 export { makeTodoDiv };
