@@ -228,5 +228,4 @@ const makeTodoDiv = (/* onLoadVersion */) => {
             editButtonSVG,
              deleteButtonSVG);
 };
-
 export { makeTodoDiv };

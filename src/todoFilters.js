@@ -94,7 +94,6 @@ const inmediateTodoDivAppending = (objectDiv) => {
         weekFilter(objectDiv.generalDiv);
     };
 };
-
 /* One more special filter (project filter) can be found in it's own module at projectLogic.js */
 
 export {inmediateTodoDivAppending, homeFilter, todayFilter, weekFilter};
