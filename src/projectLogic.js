@@ -1,7 +1,8 @@
 
-import {/* projectInputs, */ /* todoInputs */} from './addToDoButton';
+import { todoInputs} from './addToDoButton';
 import { todoObjectDataBase } from '.';
 import { sideMenuTabFilters } from '.';
+
 
 
 const projectLiDataBase = [];
@@ -10,6 +11,7 @@ const projectLiDataBase = [];
 const projectFilter = (TDobject) => {
 
     let liAlreadyExists = false;
+    let projectSwitch = false;
 
     if (projectLiDataBase.length >= 1) {
         
@@ -22,10 +24,9 @@ const projectFilter = (TDobject) => {
 
     if (liAlreadyExists === false) {
 
+        const projectsUl = document.getElementById('projects-ul');
 
-        let projectsUl = document.getElementById('projects-ul');
-
-        let newProjectTab = document.createElement('li');
+        const newProjectTab = document.createElement('li');
     
         newProjectTab.textContent = `${TDobject.projectName}`;
     
@@ -33,26 +34,40 @@ const projectFilter = (TDobject) => {
 
         projectLiDataBase.push(newProjectTab.textContent);
 
+        const filter = () => {
+            const filter = todoObjectDataBase.filter(todoObject => todoObject.projectName === newProjectTab.textContent);
+
+            for (let i = 0; i < filter.length; i++) {
+                sideMenuTabFilters.generalDiv.appendChild(filter[i].div);
+            };
+        };
+
         newProjectTab.addEventListener('click', () => {
 
             sideMenuTabFilters.currentSelectedTabCheck.home = false;
             sideMenuTabFilters.currentSelectedTabCheck.today = false;
             sideMenuTabFilters.currentSelectedTabCheck.week = false;
 
+            projectSwitch = true;
+
             sideMenuTabFilters.generalDiv.innerHTML = "";
 
-            let filter = todoObjectDataBase.filter(todoObject => todoObject.projectName === newProjectTab.textContent);
-
-            console.log(filter);
-            console.log("home",sideMenuTabFilters.currentSelectedTabCheck.home);
-            console.log("today",sideMenuTabFilters.currentSelectedTabCheck.today);
-            console.log("week",sideMenuTabFilters.currentSelectedTabCheck.week);
+            filter();
             
-            for (let i = 0; i < filter.length; i++) {
-                sideMenuTabFilters.generalDiv.appendChild(filter[i].div);
+            
+        });
+
+        todoInputs.addTodoButton.addEventListener('click', () => {
+
+            if (projectSwitch = true) {
+                sideMenuTabFilters.generalDiv.innerHTML = "";
+                filter();
             };
+
         });
     };
+
+    return projectSwitch;
 };
 
 export { projectFilter };

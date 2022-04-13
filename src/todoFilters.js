@@ -33,17 +33,6 @@ const weekFilter = (div) => {
     };
 };
 
-const projectFilter = (div, tabObject) => {
-
-    const projectFilter = tabObject.projectDatabase;
-
-    for (let i = 0; i < projectFilter.length; i++) {
-            
-        div.appendChild(projectFilter[i].div);
-    };
-    
-};
-
 
 const inmediateTodoDivAppending = (objectDiv) => {
 
@@ -64,7 +53,6 @@ const inmediateTodoDivAppending = (objectDiv) => {
         objectDiv.generalDiv.innerHTML = "";
         weekFilter(objectDiv.generalDiv);
     };
-
 };
 
 export {inmediateTodoDivAppending, homeFilter, todayFilter, weekFilter};
