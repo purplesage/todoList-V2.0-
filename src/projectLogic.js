@@ -16,6 +16,7 @@ const projectFilter = (TDobject) => {
     if (projectLiDataBase.length >= 1) {
         
         for (let i = 0; i <= projectLiDataBase.length; i++) {
+
             if (projectLiDataBase[i] === TDobject.projectName) {
                 liAlreadyExists = true;
             };
@@ -30,6 +31,7 @@ const projectFilter = (TDobject) => {
         const projectsUl = document.getElementById('projects-ul');
 
         const newProjectTab = document.createElement('li');
+        newProjectTab.style.display = "flex";
     
         newProjectTab.textContent = `${TDobject.projectName}`;
     
@@ -40,15 +42,17 @@ const projectFilter = (TDobject) => {
 
     /* This function declares a variable which contains a filtered version of the 'todoObjectDatabase' list. In it will be all the todoObjects whose project names are the same as the new tab 'li' element, then the filter function appends all the todo divs to the 'general div' element, where they are displayed. The reason i put this logic into a function is because i needed to call it in two different places. (see below). */
 
-        const filter = () => {
+        const pFilter = () => {
             const filter = todoObjectDataBase.filter(todoObject => todoObject.projectName === newProjectTab.textContent);
 
             for (let i = 0; i < filter.length; i++) {
                 sideMenuTabFilters.generalDiv.appendChild(filter[i].div);
             };
+                
+            return {filter};
         };
 
-        /* Here an event listener is added into the newly created li element. This event listener sets the tab switches to false (see index.js), activates the project switch by assigning it to true. And then, after clearing the generalDiv element (the display), the filter function is invoked. */
+    /* Here an event listener is added into the newly created li element. This event listener sets the tab switches to false (see index.js), activates the project switch by assigning it to true. And then, after clearing the generalDiv element (the display), the filter function is invoked. */
 
         newProjectTab.addEventListener('click', () => {
 
@@ -60,23 +64,48 @@ const projectFilter = (TDobject) => {
 
             sideMenuTabFilters.generalDiv.innerHTML = "";
 
-            filter();
+            pFilter();
         });
 
-        /* here a second event listener is added into the 'addButton' element, this one puts a
-        condition in it which only allows the filter function to be accesed if the 'projectSwitch' variable is set to true. This is used in order to append the todo's div as soon as the add todo button is pressed. */
+    /* here a second event listener is added into the 'addButton' element, this one puts a
+    condition in it which only allows the filter function to be accesed if the 'projectSwitch' variable is set to true. This is used in order to append the todo's div as soon as the add todo button is pressed. */
 
         todoInputs.addTodoButton.addEventListener('click', () => {
 
             if (projectSwitch = true) {
                 sideMenuTabFilters.generalDiv.innerHTML = "";
-                filter();
+                pFilter();
             };
+        });
+
+        sideMenuTabFilters.homeTab.addEventListener('click', () => {
+            projectSwitch = false;
+        });
+
+        sideMenuTabFilters.todayTab.addEventListener('click', () => {
+            projectSwitch = false;
+        });
+
+        sideMenuTabFilters.weekTab.addEventListener('click', () => {
+            projectSwitch = false;
 
         });
+        
+        const numberUpdater = () => {
+
+            newProjectTab.removeChild(newProjectTab.firstChild);
+            let numberP = document.createElement('p')
+            numberP.textContent = pFilter().filter.length;
+            newProjectTab.appendChild(numberP);
+        };
+
+        //! currently, number updated for projects bugs for an unknown reason.
+        //as i progress in T-O-P ill find a way to fix it (hopefully)
+        //todo: number creation and update:
+
     };
 
-    return projectSwitch;
+    return {projectSwitch};
 };
 
 export { projectFilter };

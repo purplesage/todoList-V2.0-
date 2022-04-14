@@ -219,6 +219,7 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 
             projectFilter(todoObject);
         };
+        defaultNumberUpdate.numberUpdate();
         
         mainGridDiv.removeChild(editInputsDiv);
     });

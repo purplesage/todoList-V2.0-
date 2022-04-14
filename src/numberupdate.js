@@ -19,17 +19,16 @@ const defaultNumberUpdate = (() => {
     const wNumberDisplay = document.createElement('p');
     weekTab.appendChild(wNumberDisplay);
 
-
     const numberUpdate = () => {
 
-        const hFilter = todoObjectDataBase.length;
-        hNumberDisplay.textContent = hFilter === 0? "": hFilter;
+        const hFilterLength = todoObjectDataBase.length;
+        hNumberDisplay.textContent = hFilterLength === 0? "": hFilterLength;
         
-        const tFilter = todayFilter().tFilter.length;
-        tNumberDisplay.textContent = tFilter === 0? "": tFilter;
+        const tFilterLength = todayFilter().tFilter.length;
+        tNumberDisplay.textContent = tFilterLength === 0? "": tFilterLength;
 
-        const wFilter = weekFilter().wFilter.length;
-        wNumberDisplay.textContent = wFilter === 0? "": wFilter;
+        const wFilterLength = weekFilter().wFilter.length;
+        wNumberDisplay.textContent = wFilterLength === 0? "": wFilterLength;
 
     };
 

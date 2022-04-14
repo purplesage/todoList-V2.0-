@@ -2,6 +2,7 @@ import './styles/index.scss';
 import {addButtonDomElements, todoInputs, projectInputs} from './addToDoButton';
 import { homeFilter, todayFilter, weekFilter } from './todoFilters';
 
+
 //? This module contains the content divs
 //for the web's functions (logic), see logic.js
 
@@ -32,6 +33,7 @@ const sideMenuTabFilters = (() => {
         currentSelectedTabCheck.home = true;
         currentSelectedTabCheck.today = false;
         currentSelectedTabCheck.week = false;
+
         
         generalDiv.innerHTML = "";
         homeFilter();
@@ -44,6 +46,7 @@ const sideMenuTabFilters = (() => {
         currentSelectedTabCheck.home = false;
         currentSelectedTabCheck.today = true;
         currentSelectedTabCheck.week = false;
+        
 
         generalDiv.innerHTML = "";
         todayFilter();
@@ -56,12 +59,13 @@ const sideMenuTabFilters = (() => {
         currentSelectedTabCheck.home = false;
         currentSelectedTabCheck.today = false;
         currentSelectedTabCheck.week = true;
+    
 
         generalDiv.innerHTML = "";
         weekFilter();
     });
 
-    return {generalDiv, currentSelectedTabCheck};
+    return {generalDiv, currentSelectedTabCheck, homeTab, todayTab, weekTab};
 
 })(); 
 
