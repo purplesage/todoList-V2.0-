@@ -40,6 +40,8 @@ const todayFilter = (div) => {
                     
             div.appendChild(todayFilter[i].div);
         };
+
+        return {todayFilter};
 };
 
 /*clicking on the 'week' tab shows all todos which are due this week  */
