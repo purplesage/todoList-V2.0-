@@ -38,6 +38,7 @@ const addButtonDomElements = (() => {
 
     //appends add button div to main-grid div.
     mainGridDiv.appendChild(addButtonDiv);
+
     
     //*event listeners to reveal and hide addButtonDiv.
     addButtonDomElement.addEventListener('click', () => {
@@ -47,6 +48,7 @@ const addButtonDomElements = (() => {
         //default content:
         addButtonDomElements.inputMainDiv.innerHTML = "";
         addButtonDomElements.inputMainDiv.append(todoInputs.topInputsDiv, todoInputs.dueDateLabel, todoInputs.dueDateInput, todoInputs.priorityButtonsDiv, todoInputs.addTodoButton);
+
 
     });
 
@@ -152,8 +154,6 @@ const todoInputs = (() => {
             highPriorityLabel,
              highPriorityButton);
 
-    
-
     //add todo event listener
     addTodoButton.addEventListener('click', () => {
         makeTodoDiv();
@@ -162,6 +162,18 @@ const todoInputs = (() => {
 
         defaultNumberUpdate.numberUpdate();
 
+
+
+        //clears input values after todo creation.
+        titleInput.value = "";
+        detailsInput.value = "";
+        projectInput.value = "";
+        dueDateInput.value = "";
+        lowPriorityButton.checked = false;
+        mediumPriorityButton.checked = false;
+        highPriorityButton. checked = false;
+
+        //hides add todo div.
         addButtonDomElements.addButtonDiv.style.display = "none";
     });
 
@@ -176,7 +188,6 @@ const todoInputs = (() => {
                projectInput,
                 addTodoButton,
             };
-
 })();
 
 export {addButtonDomElements, todoInputs, /* projectInputs */};
