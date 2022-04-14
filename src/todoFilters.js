@@ -58,12 +58,14 @@ const weekFilter = () => {
     but i suspect that i just dont know how to use it properly.
     
     */
-    const weekFilter = todoObjectDataBase.filter(todoObject => isThisWeek(new Date(todoObject.dueDate)) === true);
+    const wFilter = todoObjectDataBase.filter(todoObject => isThisWeek(new Date(todoObject.dueDate)) === true);
 
-    for (let i = 0; i < weekFilter.length; i++) {
+    for (let i = 0; i < wFilter.length; i++) {
             
-        sideMenuTabFilters.generalDiv.appendChild(weekFilter[i].div);
+        sideMenuTabFilters.generalDiv.appendChild(wFilter[i].div);
     };
+
+    return {wFilter};
 };
 
 

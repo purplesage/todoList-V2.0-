@@ -2,6 +2,7 @@ import {todoInputs} from './addToDoButton';
 import { todoObjectDataBase } from '.';
 import { format, parseISO} from 'date-fns';
 import { projectFilter } from './projectLogic';
+import { defaultNumberUpdate } from './numberupdate';
 
 const makeTodoObject = () => {
     const newTodoObject = {
@@ -119,6 +120,8 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 
         contentDiv.removeChild(todoDiv);
         todoObjectDataBase.splice(todoObjectDataBase.indexOf(todoObject), 1);
+
+        defaultNumberUpdate.numberUpdate();
         
     });
 
