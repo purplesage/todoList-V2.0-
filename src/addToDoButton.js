@@ -2,6 +2,7 @@ import {makeTodoDiv} from "./todoMaker";
 import { sideMenuTabFilters } from ".";
 import { inmediateTodoDivAppending } from "./todoFilters";
 import { makeProjectTab } from "./projectLogic";
+import { defaultNumberUpdate } from "./numberupdate";
 
 const addButtonDomElements = (() => {
 
@@ -157,7 +158,9 @@ const todoInputs = (() => {
     addTodoButton.addEventListener('click', () => {
         makeTodoDiv();
 
-        inmediateTodoDivAppending(sideMenuTabFilters);
+        inmediateTodoDivAppending();
+
+        defaultNumberUpdate.numberUpdate();
 
         addButtonDomElements.addButtonDiv.style.display = "none";
     });

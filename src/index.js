@@ -34,7 +34,7 @@ const sideMenuTabFilters = (() => {
         currentSelectedTabCheck.week = false;
         
         generalDiv.innerHTML = "";
-        homeFilter(generalDiv);
+        homeFilter();
     });
 
     //*today filter
@@ -46,7 +46,7 @@ const sideMenuTabFilters = (() => {
         currentSelectedTabCheck.week = false;
 
         generalDiv.innerHTML = "";
-        todayFilter(generalDiv);
+        todayFilter();
     });
 
     //*week filter
@@ -58,7 +58,7 @@ const sideMenuTabFilters = (() => {
         currentSelectedTabCheck.week = true;
 
         generalDiv.innerHTML = "";
-        weekFilter(generalDiv);
+        weekFilter();
     });
 
     return {generalDiv, currentSelectedTabCheck};

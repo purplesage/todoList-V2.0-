@@ -1,5 +1,6 @@
 import { todoObjectDataBase } from ".";
 import {format, isThisWeek} from "date-fns";
+import {sideMenuTabFilters} from '.';
 
 //* filter functions.
 
@@ -10,18 +11,18 @@ for example:  */
 
 /* when clicking the 'home' tab, we want to show every single todo div in the database
  (this one isn't much of a filter, but i kept the name for consistency). */
-const homeFilter = (div) => {
+const homeFilter = () => {
 
     for (let i = 0; i < todoObjectDataBase.length; i++) {
                     
-        div.appendChild(todoObjectDataBase[i].div);
+        sideMenuTabFilters.generalDiv.appendChild(todoObjectDataBase[i].div);
     };
 
 };
 
 /* clicking on the 'today' tab, all todo objects div's which are due for 
 today's date will be shown. */
-const todayFilter = (div) => {
+const todayFilter = () => {
 
     /* in order to make the evaluation, both the todo object's due date and today's date
     have to be formated in the same way. 
@@ -32,20 +33,20 @@ const todayFilter = (div) => {
     So i formated both to show only month/day/year. */
 
     const todaysDate = format(new Date(), "MM/dd/yyyy");
-    const todayFilter = todoObjectDataBase.filter(todoObject => format(todoObject.dueDate, "MM/dd/yyyy") === todaysDate);
+    const tFilter = todoObjectDataBase.filter(todoObject => format(todoObject.dueDate, "MM/dd/yyyy") === todaysDate);
 
     //after filtering, all the divs in the filtered list are added.
 
-        for (let i = 0; i < todayFilter.length; i++) {
+        for (let i = 0; i < tFilter.length; i++) {
                     
-            div.appendChild(todayFilter[i].div);
+            sideMenuTabFilters.generalDiv.appendChild(tFilter[i].div);
         };
 
-        return {todayFilter};
+        return {tFilter};
 };
 
 /*clicking on the 'week' tab shows all todos which are due this week  */
-const weekFilter = (div) => {
+const weekFilter = () => {
 
     /* the 'isThisWeek' function is used to check if a given date is in this week.
     For some reason, it only works if, as argument, it is fed a new date object, which contains a date object with a parseISO fed into it. It looks something like this:
@@ -61,7 +62,7 @@ const weekFilter = (div) => {
 
     for (let i = 0; i < weekFilter.length; i++) {
             
-        div.appendChild(weekFilter[i].div);
+        sideMenuTabFilters.generalDiv.appendChild(weekFilter[i].div);
     };
 };
 
@@ -76,24 +77,24 @@ the 'addTodoButton' (see addToDoButton.js) invokes this function.
 
 */
 
-const inmediateTodoDivAppending = (objectDiv) => {
+const inmediateTodoDivAppending = () => {
 
     /* appends todo Div to the main content div depending
      on which sidemenu tab is currently pressed. */
 
-    if (objectDiv.currentSelectedTabCheck.home === true){
-        objectDiv.generalDiv.innerHTML = "";
-        homeFilter(objectDiv.generalDiv);
+    if (sideMenuTabFilters.currentSelectedTabCheck.home === true){
+        sideMenuTabFilters.generalDiv.innerHTML = "";
+        homeFilter();
     };
 
-    if(objectDiv.currentSelectedTabCheck.today === true){
-        objectDiv.generalDiv.innerHTML = "";
-        todayFilter(objectDiv.generalDiv);
+    if(sideMenuTabFilters.currentSelectedTabCheck.today === true){
+        sideMenuTabFilters.generalDiv.innerHTML = "";
+        todayFilter();
     };
     
-    if(objectDiv.currentSelectedTabCheck.week === true){
-        objectDiv.generalDiv.innerHTML = "";
-        weekFilter(objectDiv.generalDiv);
+    if(sideMenuTabFilters.currentSelectedTabCheck.week === true){
+        sideMenuTabFilters.generalDiv.innerHTML = "";
+        weekFilter();
     };
 };
 /* One more special filter (project filter) can be found in it's own module at projectLogic.js */
