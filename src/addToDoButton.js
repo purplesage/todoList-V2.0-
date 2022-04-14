@@ -1,7 +1,5 @@
 import {makeTodoDiv} from "./todoMaker";
-import { sideMenuTabFilters } from ".";
 import { inmediateTodoDivAppending } from "./todoFilters";
-import { makeProjectTab } from "./projectLogic";
 import { defaultNumberUpdate } from "./numberupdate";
 
 const addButtonDomElements = (() => {
@@ -58,7 +56,6 @@ const addButtonDomElements = (() => {
 
     });
 
-    //these elements will perform specific actions through event listeners.
     return { divExitButton, inputMainDiv, addButtonDiv };
 
 })();
@@ -154,17 +151,10 @@ const todoInputs = (() => {
             highPriorityLabel,
              highPriorityButton);
 
-    //add todo event listener
-    addTodoButton.addEventListener('click', () => {
-        makeTodoDiv();
-
-        inmediateTodoDivAppending();
-
-        defaultNumberUpdate.numberUpdate();
 
 
-
-        //clears input values after todo creation.
+//function that resets input values.
+    const inputReset = () => {
         titleInput.value = "";
         detailsInput.value = "";
         projectInput.value = "";
@@ -172,9 +162,28 @@ const todoInputs = (() => {
         lowPriorityButton.checked = false;
         mediumPriorityButton.checked = false;
         highPriorityButton. checked = false;
+    };
+
+    //add todo event listener
+    addTodoButton.addEventListener('click', () => {
+        //creates todo div (see todoMaker.js)
+        makeTodoDiv();
+
+        //inmediatly appends todo div depending on certain conditions (see todoFilters.js)
+        inmediateTodoDivAppending();
+
+        //updates default number display (see numberupdate.js)
+        defaultNumberUpdate.numberUpdate();
+
+        //clears input values after todo creation.
+        inputReset()
 
         //hides add todo div.
         addButtonDomElements.addButtonDiv.style.display = "none";
+    });
+
+    addButtonDomElements.divExitButton.addEventListener('click', () => {
+        inputReset()
     });
 
     return {
