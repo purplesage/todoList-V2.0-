@@ -2,8 +2,6 @@ import { todoInputs} from './addToDoButton';
 import { todoObjectDataBase } from '.';
 import { sideMenuTabFilters } from '.';
 
-
-
 const projectLiDataBase = [];
 
 //* project 'li' maker.
@@ -91,7 +89,6 @@ const projectFilter = (TDobject) => {
 
         });
         
-
         //! currently, number updated for projects bugs for an unknown reason.
         //as i progress in T-O-P ill find a way to fix it (hopefully)
         //todo: number creation and update:

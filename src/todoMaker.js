@@ -3,6 +3,7 @@ import { todoObjectDataBase } from '.';
 import { format, parseISO} from 'date-fns';
 import { projectFilter } from './projectLogic';
 import { defaultNumberUpdate } from './numberupdate';
+import { LSobjectSetter } from './localstorage';
 
 const makeTodoObject = () => {
     const newTodoObject = {
@@ -28,35 +29,37 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     //* todomaker function invocation and DOM elements creation
     const todoObject = makeTodoObject();
 
+    
     const todoDiv = document.createElement('li');
-        todoDiv.classList = "todo-div";
-
+    todoDiv.classList = "todo-div";
+    
     const doneCheckButton = document.createElement('input');
-        doneCheckButton.setAttribute('type', 'checkbox');
-        doneCheckButton.setAttribute('id', 'done-check-button');
+    doneCheckButton.setAttribute('type', 'checkbox');
+    doneCheckButton.setAttribute('id', 'done-check-button');
 
     const todoTitleP = document.createElement('p');
-        todoTitleP.textContent = `${todoObject.title}`;
-
+    todoTitleP.textContent = `${todoObject.title}`;
+    
     const detailsButton = document.createElement('button');
-        detailsButton.textContent = 'DETAILS';  
-
+    detailsButton.textContent = 'DETAILS';  
+    
     const todoDueDateP = document.createElement('p');
-        todoDueDateP.textContent = `${format(todoObject.dueDate, "MM/dd/yyyy")}`;
-
+    todoDueDateP.textContent = `${format(todoObject.dueDate, "MM/dd/yyyy")}`;
+    
     const editButtonSVG = document.createElement('p');
-        editButtonSVG.textContent = 'EDIT-SVG';
-
+    editButtonSVG.textContent = 'EDIT-SVG';
+    
     const deleteButtonSVG = document.createElement('p');
-        deleteButtonSVG.textContent = 'DELETE-SVG';
-
+    deleteButtonSVG.textContent = 'DELETE-SVG';
+    
     //* priority property definition and style change.
     const priorityRadioButtons = todoInputs.priorityButtonsDiv.getElementsByTagName('input')
-
+    
     for (let i = 0; i < priorityRadioButtons.length; i++) {
         if (priorityRadioButtons[i].checked === true ) {
             todoObject.priority = priorityRadioButtons[i].value
             break;
+            
         };
     };
 
@@ -74,6 +77,8 @@ const makeTodoDiv = (/* onLoadVersion */) => {
 
     todoObject.div = todoDiv;
 
+
+    LSobjectSetter(todoObject);
     todoObjectDataBase.push(todoObject);
 
     //*project filter call
