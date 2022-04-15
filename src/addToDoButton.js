@@ -24,9 +24,7 @@ const addButtonDomElements = (() => {
 
     header.append(headerP, divExitButton);
 
-
     //*input div basic element
-
     const inputMainDiv = document.createElement('div');
     inputMainDiv.classList = "input-main-div";
 
@@ -36,7 +34,6 @@ const addButtonDomElements = (() => {
 
     //appends add button div to main-grid div.
     mainGridDiv.appendChild(addButtonDiv);
-
     
     //*event listeners to reveal and hide addButtonDiv.
     addButtonDomElement.addEventListener('click', () => {
@@ -46,8 +43,6 @@ const addButtonDomElements = (() => {
         //default content:
         addButtonDomElements.inputMainDiv.innerHTML = "";
         addButtonDomElements.inputMainDiv.append(todoInputs.topInputsDiv, todoInputs.dueDateLabel, todoInputs.dueDateInput, todoInputs.priorityButtonsDiv, todoInputs.addTodoButton);
-
-
     });
 
     divExitButton.addEventListener('click', () => {
@@ -150,8 +145,6 @@ const todoInputs = (() => {
            mediumPriorityButton,
             highPriorityLabel,
              highPriorityButton);
-
-
 
 //function that resets input values.
     const inputReset = () => {

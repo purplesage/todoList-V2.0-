@@ -24,7 +24,6 @@ const makeTodoDiv = (todoObject) => {
    
     //* todomaker function invocation and DOM elements creation
     /* const todoObject = makeTodoObject(); */
-
     
     const todoDiv = document.createElement('li');
     todoDiv.classList = "todo-div";
@@ -72,7 +71,6 @@ const makeTodoDiv = (todoObject) => {
     };
 
     todoObject.div = todoDiv;
-    console.log(todoObject.div, "from maker");
     LSobjectSetter(todoObject);
     todoObjectDataBase.push(todoObject);
 
