@@ -19,11 +19,11 @@ const makeTodoObject = () => {
 
 };
 
-const makeTodoDiv = () => {
+const makeTodoDiv = (todoObject) => {
 
    
     //* todomaker function invocation and DOM elements creation
-    const todoObject = makeTodoObject();
+    /* const todoObject = makeTodoObject(); */
 
     
     const todoDiv = document.createElement('li');
@@ -232,4 +232,4 @@ const makeTodoDiv = () => {
             editButtonSVG,
              deleteButtonSVG);
 };
-export { makeTodoDiv };
+export { makeTodoDiv, makeTodoObject };

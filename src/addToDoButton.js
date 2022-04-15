@@ -1,4 +1,4 @@
-import {makeTodoDiv} from "./todoMaker";
+import {makeTodoDiv, makeTodoObject} from "./todoMaker";
 import { inmediateTodoDivAppending } from "./todoFilters";
 import { defaultNumberUpdate } from "./numberupdate";
 
@@ -167,7 +167,7 @@ const todoInputs = (() => {
     //add todo event listener
     addTodoButton.addEventListener('click', () => {
         //creates todo div (see todoMaker.js)
-        makeTodoDiv();
+        makeTodoDiv(makeTodoObject());
 
         //inmediatly appends todo div depending on certain conditions (see todoFilters.js)
         inmediateTodoDivAppending();
