@@ -3,7 +3,7 @@ import { homeFilter } from "./todoFilters";
 
 const LSobjectSetter = (todoObject) => {
 
-    window.localStorage.setItem('todoObject', JSON.stringify(todoObject));
+    window.localStorage.setItem('todoObject', todoObject.div.innerHTML);
 
 };
 
@@ -15,11 +15,13 @@ const LSobjectDivPopulator = (dataBase) => {
             
             const parsedTodoObject = JSON.parse(window.localStorage.getItem('todoObject'));
             dataBase.push(parsedTodoObject);
-            
+
+            console.log(parsedTodoObject);
+
         };
         
-        /* homeFilter(); */
+        homeFilter();
     };
 };
 
-export {LSobjectSetter, LSobjectDivPopulator};
+export {LSobjectSetter, /* LSobjectDivPopulator */};

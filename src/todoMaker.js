@@ -19,13 +19,9 @@ const makeTodoObject = () => {
 
 };
 
-const makeTodoDiv = (/* onLoadVersion */) => {
+const makeTodoDiv = () => {
 
-    //todo: idea for onLoad content loading.
-    /* if (onLoadVersion === true) {
-        maybe a switch statement that will change from makeTodoObject to database.forEach()
-    } */
-
+   
     //* todomaker function invocation and DOM elements creation
     const todoObject = makeTodoObject();
 
@@ -76,8 +72,7 @@ const makeTodoDiv = (/* onLoadVersion */) => {
     };
 
     todoObject.div = todoDiv;
-
-
+    console.log(todoObject.div, "from maker");
     LSobjectSetter(todoObject);
     todoObjectDataBase.push(todoObject);
 
