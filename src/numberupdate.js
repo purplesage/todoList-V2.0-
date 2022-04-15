@@ -7,17 +7,17 @@ const defaultNumberUpdate = (() => {
     const homeTab = document.getElementById('home-tab');
         homeTab.style.display = 'flex';
     const hNumberDisplay = document.createElement('p');
-    homeTab.appendChild(hNumberDisplay);
+        homeTab.appendChild(hNumberDisplay);
 
     const todayTab = document.getElementById('today-tab');
         todayTab.style.display = 'flex';
     const tNumberDisplay = document.createElement('p');
-    todayTab.appendChild(tNumberDisplay);
+        todayTab.appendChild(tNumberDisplay);
 
     const weekTab = document.getElementById('week-tab');
-    weekTab.style.display = 'flex';
+        weekTab.style.display = 'flex';
     const wNumberDisplay = document.createElement('p');
-    weekTab.appendChild(wNumberDisplay);
+        weekTab.appendChild(wNumberDisplay);
 
     const numberUpdate = () => {
 

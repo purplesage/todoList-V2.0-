@@ -31,7 +31,7 @@ const projectFilter = (TDobject) => {
         const projectsUl = document.getElementById('projects-ul');
 
         const newProjectTab = document.createElement('li');
-        newProjectTab.style.display = "flex";
+            newProjectTab.style.display = "flex";
     
         newProjectTab.textContent = `${TDobject.projectName}`;
     
@@ -48,7 +48,7 @@ const projectFilter = (TDobject) => {
             for (let i = 0; i < filter.length; i++) {
                 sideMenuTabFilters.generalDiv.appendChild(filter[i].div);
             };
-                
+
             return {filter};
         };
 
@@ -91,13 +91,6 @@ const projectFilter = (TDobject) => {
 
         });
         
-        const numberUpdater = () => {
-
-            newProjectTab.removeChild(newProjectTab.firstChild);
-            let numberP = document.createElement('p')
-            numberP.textContent = pFilter().filter.length;
-            newProjectTab.appendChild(numberP);
-        };
 
         //! currently, number updated for projects bugs for an unknown reason.
         //as i progress in T-O-P ill find a way to fix it (hopefully)
