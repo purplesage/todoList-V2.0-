@@ -3,7 +3,7 @@ import { todoObjectDataBase } from '.';
 import { format, parseISO} from 'date-fns';
 import { projectFilter } from './projectLogic';
 import { defaultNumberUpdate } from './numberupdate';
-import { LSobjectSetter } from './localstorage';
+
 
 const makeTodoObject = () => {
     const newTodoObject = {

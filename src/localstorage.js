@@ -21,16 +21,15 @@ const LSobjectDivPopulator = () => {
 
         console.log(window.localStorage[0]);
         
-        for (let i = 0; i <= window.localStorage.length; i++) {
+        for (let i = 0; i < window.localStorage.length; i++) {
             
             const parsedTodoObject = JSON.parse(window.localStorage.getItem(`todoObject${i}`));
             parsedTodoObject.dueDate = new Date(parseISO(parsedTodoObject.dueDate));
+            /* parsedTodoObject.fromStorage = true; */
 
             makeTodoDiv(parsedTodoObject);
         };
-        
-        homeFilter();
-        defaultNumberUpdate.numberUpdate();
+
     };
 };
 

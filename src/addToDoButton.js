@@ -192,4 +192,4 @@ const todoInputs = (() => {
             };
 })();
 
-export {addButtonDomElements, todoInputs, /* projectInputs */};
+export {addButtonDomElements, todoInputs};

@@ -67,14 +67,14 @@ const projectFilter = (TDobject) => {
 
     /* here a second event listener is added into the 'addButton' element, this one puts a
     condition in it which only allows the filter function to be accesed if the 'projectSwitch' variable is set to true. This is used in order to append the todo's div as soon as the add todo button is pressed. */
-
-        todoInputs.addTodoButton.addEventListener('click', () => {
+        //todo :this function does not work properly, need to refactor.
+        /* todoInputs.addTodoButton.addEventListener('click', () => {
 
             if (projectSwitch = true) {
                 sideMenuTabFilters.generalDiv.innerHTML = "";
                 pFilter();
             };
-        });
+        }); */
 
         sideMenuTabFilters.homeTab.addEventListener('click', () => {
             projectSwitch = false;

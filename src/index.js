@@ -1,7 +1,7 @@
 import './styles/index.scss';
-import {addButtonDomElements, todoInputs, projectInputs} from './addToDoButton';
 import { homeFilter, todayFilter, weekFilter } from './todoFilters';
 import { LSobjectDivPopulator, LSobjectSetter } from './localstorage';
+import { defaultNumberUpdate } from './numberupdate';
 
 
 //? This module contains the content divs
@@ -71,10 +71,17 @@ const sideMenuTabFilters = (() => {
 })(); 
 
 window.addEventListener('beforeunload', () => {
-    LSobjectSetter(todoObjectDataBase)
+    window.localStorage.clear();
+    LSobjectSetter(todoObjectDataBase);
+    
 });
 
-window.addEventListener('load', LSobjectDivPopulator());
+window.addEventListener('load', () =>{
+    LSobjectDivPopulator();
+    homeFilter();
+    defaultNumberUpdate.numberUpdate();
+    
+});
 
 export { todoObjectDataBase, sideMenuTabFilters };
 
