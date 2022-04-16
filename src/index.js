@@ -71,8 +71,8 @@ const sideMenuTabFilters = (() => {
 })(); 
 
 window.addEventListener('beforeunload', () => {
-    window.localStorage.clear();
-    LSobjectSetter(todoObjectDataBase);
+    window.localStorage.clear(); //clears local storage to avoid bugs.
+    LSobjectSetter(todoObjectDataBase); //adds remaining objects from database into localStorage.
     
 });
 
