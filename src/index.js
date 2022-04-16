@@ -29,13 +29,11 @@ const sideMenuTabFilters = (() => {
     //default content 
     displayDiv.appendChild(generalDiv);
 
-
     homeTab.addEventListener('click', () => {
         currentSelectedTabCheck.home = true;
         currentSelectedTabCheck.today = false;
         currentSelectedTabCheck.week = false;
 
-        
         generalDiv.innerHTML = "";
         homeFilter();
     });
@@ -47,8 +45,7 @@ const sideMenuTabFilters = (() => {
         currentSelectedTabCheck.home = false;
         currentSelectedTabCheck.today = true;
         currentSelectedTabCheck.week = false;
-        
-
+    
         generalDiv.innerHTML = "";
         todayFilter();
     });
@@ -60,7 +57,6 @@ const sideMenuTabFilters = (() => {
         currentSelectedTabCheck.home = false;
         currentSelectedTabCheck.today = false;
         currentSelectedTabCheck.week = true;
-    
 
         generalDiv.innerHTML = "";
         weekFilter();
@@ -76,7 +72,7 @@ window.addEventListener('beforeunload', () => {
     
 });
 
-window.addEventListener('load', () =>{
+window.addEventListener('load', () => {
     LSobjectDivPopulator();
     homeFilter();
     defaultNumberUpdate.numberUpdate();
