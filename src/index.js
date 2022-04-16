@@ -1,7 +1,7 @@
 import './styles/index.scss';
 import {addButtonDomElements, todoInputs, projectInputs} from './addToDoButton';
 import { homeFilter, todayFilter, weekFilter } from './todoFilters';
-import { LSobjectDivPopulator } from './localstorage';
+import { LSobjectDivPopulator, LSobjectSetter } from './localstorage';
 
 
 //? This module contains the content divs
@@ -69,6 +69,10 @@ const sideMenuTabFilters = (() => {
     return {generalDiv, currentSelectedTabCheck, homeTab, todayTab, weekTab};
 
 })(); 
+
+window.addEventListener('beforeunload', () => {
+    LSobjectSetter(todoObjectDataBase)
+});
 
 window.addEventListener('load', LSobjectDivPopulator());
 

@@ -71,7 +71,6 @@ const makeTodoDiv = (todoObject) => {
     };
 
     todoObject.div = todoDiv;
-    LSobjectSetter(todoObject);
     todoObjectDataBase.push(todoObject);
 
     //*project filter call
