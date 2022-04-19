@@ -46,6 +46,7 @@ const makeTodoDiv = (todoObject) => {
     
     const deleteButtonSVG = document.createElement('p');
     deleteButtonSVG.textContent = 'DELETE-SVG';
+    deleteButtonSVG.classList = 'delete-button';
     
     //* priority property definition and style change.
     const priorityRadioButtons = todoInputs.priorityButtonsDiv.getElementsByTagName('input')
@@ -73,11 +74,7 @@ const makeTodoDiv = (todoObject) => {
     todoObject.div = todoDiv;
     todoObjectDataBase.push(todoObject);
 
-    //*project filter call
-    if (todoObject.projectName !== "") {
-
-        projectFilter(todoObject);
-    };
+    
 
     //*details div:
     //todo: put all of these 'functions'... IN SOME FUNCTIONS! (duh)
@@ -214,12 +211,18 @@ const makeTodoDiv = (todoObject) => {
 
         if (todoObject.projectName !== "") {
 
-            projectFilter(todoObject);
+            projectFilter(todoObject, deleteButtonSVG, editConfirmButton);
         };
         defaultNumberUpdate.numberUpdate();
         
         mainGridDiv.removeChild(editInputsDiv);
     });
+
+    //*project filter call
+    if (todoObject.projectName !== "") {
+
+        projectFilter(todoObject, deleteButtonSVG, editConfirmButton);
+    };
     
     todoDiv.append(
         doneCheckButton,

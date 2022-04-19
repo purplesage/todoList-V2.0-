@@ -1,5 +1,6 @@
 import { makeTodoDiv } from "./todoMaker";
 import parseISO from "date-fns/parseISO";
+import { projectFilter } from "./projectLogic";
 
 const LSobjectSetter = (dataBase) => {
 

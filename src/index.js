@@ -2,6 +2,7 @@ import './styles/index.scss';
 import { homeFilter, todayFilter, weekFilter } from './todoFilters';
 import { LSobjectDivPopulator, LSobjectSetter } from './localstorage';
 import { defaultNumberUpdate } from './numberupdate';
+import { projectFilter } from './projectLogic';
 
 
 //? This module contains the content divs
@@ -76,7 +77,6 @@ window.addEventListener('load', () => {
     LSobjectDivPopulator();
     homeFilter();
     defaultNumberUpdate.numberUpdate();
-    
 });
 
 export { todoObjectDataBase, sideMenuTabFilters };
