@@ -92,6 +92,7 @@ const makeTodoDiv = (todoObject) => {
     const detailsExitButton = document.createElement('button');
         detailsExitButton.textContent = 'X';
 
+    detailsDiv.append(detailsTitle, detailsExitButton, detailsP);
 
     // details div display and undisplay (<-is that a word? lol)
     detailsExitButton.addEventListener('click', () => {
@@ -99,7 +100,6 @@ const makeTodoDiv = (todoObject) => {
         mainGridDiv.removeChild(detailsDiv);
     });
 
-    detailsDiv.append(detailsTitle, detailsExitButton, detailsP);
 
     detailsButton.addEventListener('click', () => {
 
